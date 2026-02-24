@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "493516272043",
+    "project_id": "easylearn-chat",
+    "storage_bucket": "easylearn-chat.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:493516272043:android:ac19aa0bb3945f2bc4a2ee",
+        "android_client_info": {
+          "package_name": "com.example.chat_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBj6GvduKS4_y7M0zzPW2bVGgwMyZknJ8M"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
