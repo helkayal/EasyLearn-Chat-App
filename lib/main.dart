@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'chat_app.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(const ChatApp());
