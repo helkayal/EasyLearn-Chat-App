@@ -9,6 +9,7 @@ class SignupCubit extends Cubit<SignupState> {
 
   Future<void> signUp(String name, String email, String password) async {
     emit(SignupLoading());
+
     try {
       final credential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(email: email, password: password);
@@ -24,11 +25,12 @@ class SignupCubit extends Cubit<SignupState> {
           email: email,
           status: 'Online',
         );
-
         await FirebaseFirestore.instance
             .collection('users')
             .doc(user.uid)
             .set(newUser.toMap());
+
+        await user.sendEmailVerification();
 
         emit(SignupSuccess());
       }

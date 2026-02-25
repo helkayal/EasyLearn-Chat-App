@@ -18,7 +18,12 @@ class SignupScreen extends StatelessWidget {
           listener: (context, state) {
             if (state is SignupSuccess) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text("Account created successfully!")),
+                const SnackBar(
+                  content: Text(
+                    "Account created! Please check your email to verify your account.",
+                  ),
+                  duration: Duration(seconds: 5),
+                ),
               );
               Navigator.pushAndRemoveUntil(
                 context,
@@ -32,6 +37,7 @@ class SignupScreen extends StatelessWidget {
                   backgroundColor: Theme.of(context).colorScheme.error,
                 ),
               );
+              print(state.message);
             }
           },
           child: const SafeArea(
