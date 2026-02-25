@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import '../cubit/navigation_cubit.dart';
+import '../widgets/bottom_nav_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text("Home Screen")));
+    return BlocProvider(
+      create: (context) => NavigationCubit(),
+      child: Scaffold(
+        body: BlocBuilder<NavigationCubit, int>(
+          builder: (context, state) {
+            return IndexedStack(
+              index: state,
+              children: const [
+                Center(child: Text("Chats Screen")),
+                Center(child: Text("Profile Screen")),
+                Center(child: Text("Settings Screen")),
+              ],
+            );
+          },
+        ),
+        bottomNavigationBar: const CustomBottomNavBar(),
+      ),
+    );
   }
 }

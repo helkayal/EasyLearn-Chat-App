@@ -12,7 +12,7 @@ class AppTheme {
       primary: AppColors.primaryPurple,
       onPrimary: AppColors.white,
       surface: AppColors.white,
-      error: AppColors.errorRed, // Using your error color from AppColors
+      error: AppColors.errorRed,
       onSurface: AppColors.textBlack,
     ),
 
@@ -57,6 +57,22 @@ class AppTheme {
     dividerTheme: const DividerThemeData(
       color: AppColors.secondaryGrey,
       thickness: 1,
+    ),
+
+    // 6. SnackBar Theme
+    snackBarTheme: const SnackBarThemeData(
+      backgroundColor: AppColors.primaryPurple,
+      contentTextStyle: AppTextStyles.buttonText,
+    ),
+
+    // 7. BottomNavigationBar Theme
+    bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+      backgroundColor: AppColors.white,
+      selectedItemColor: AppColors.primaryPurple,
+      unselectedItemColor: AppColors.textGrey,
+      showSelectedLabels: true,
+      selectedIconTheme: IconThemeData(size: 30),
+      unselectedIconTheme: IconThemeData(size: 25),
     ),
   );
 }
