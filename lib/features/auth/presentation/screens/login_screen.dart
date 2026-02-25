@@ -49,6 +49,7 @@
 // }
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../home/presentation/screens/home_screen.dart';
 import '../cubit/login_cubit.dart';
 import '../cubit/login_states.dart';
 import '../widgets/login_header.dart';
@@ -69,7 +70,11 @@ class LoginScreen extends StatelessWidget {
         body: BlocListener<LoginCubit, LoginState>(
           listener: (context, state) {
             if (state is LoginSuccess) {
-              // Navigate to Home/Dashboard
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
+                (route) => false,
+              );
             } else if (state is LoginError) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
