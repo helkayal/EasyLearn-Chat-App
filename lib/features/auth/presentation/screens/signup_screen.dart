@@ -37,7 +37,6 @@ class SignupScreen extends StatelessWidget {
                   backgroundColor: Theme.of(context).colorScheme.error,
                 ),
               );
-              print(state.message);
             }
           },
           child: const SafeArea(
