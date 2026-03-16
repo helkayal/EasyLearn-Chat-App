@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
+import '../screens/new_chat_screen.dart';
+
 class ChatSearchBar extends StatelessWidget {
-  const ChatSearchBar({super.key});
+  final ValueChanged<String>? onChanged;
+  final VoidCallback? onAddPressed;
+
+  const ChatSearchBar({super.key, this.onChanged, this.onAddPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +24,7 @@ class ChatSearchBar extends StatelessWidget {
                 borderRadius: BorderRadius.circular(15),
               ),
               child: TextField(
+                onChanged: onChanged,
                 decoration: InputDecoration(
                   icon: Icon(
                     Icons.search,
@@ -33,15 +39,20 @@ class ChatSearchBar extends StatelessWidget {
             ),
           ),
           const SizedBox(width: 10),
-          Container(
-            padding: const EdgeInsets.all(12),
-            decoration: BoxDecoration(
-              color: theme.dividerTheme.color?.withValues(alpha: 0.2),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: Icon(
-              Icons.qr_code_scanner,
-              color: theme.colorScheme.onSurface,
+          GestureDetector(
+            onTap:
+                onAddPressed ??
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const NewChatScreen()),
+                ),
+            child: Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: theme.primaryColor,
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Icon(Icons.add_comment, color: Colors.white),
             ),
           ),
         ],
