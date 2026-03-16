@@ -30,7 +30,7 @@ class SignupCubit extends Cubit<SignupState> {
             .doc(user.uid)
             .set(newUser.toMap());
 
-        await user.sendEmailVerification();
+        // await user.sendEmailVerification();
 
         emit(SignupSuccess());
       }
