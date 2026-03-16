@@ -46,13 +46,9 @@ class ChatSearchBar extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (_) => const NewChatScreen()),
                 ),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: theme.primaryColor,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Icon(Icons.add_comment, color: Colors.white),
+            child: CircleAvatar(
+              backgroundColor: theme.colorScheme.primary.withValues(alpha: .5),
+              child: Icon(Icons.add, color: theme.colorScheme.primary),
             ),
           ),
         ],

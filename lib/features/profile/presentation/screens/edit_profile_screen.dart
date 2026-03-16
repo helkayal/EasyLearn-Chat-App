@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/widgets/custom_avatar.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../auth/model/user_model.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
@@ -61,13 +62,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 onTap: _pickImage,
                 child: Stack(
                   children: [
-                    CircleAvatar(
-                      radius: 60,
-                      backgroundImage: _imageFile != null
-                          ? FileImage(_imageFile!)
-                          : NetworkImage(widget.user.profilePic)
-                                as ImageProvider,
-                    ),
+                    if (_imageFile != null)
+                      CircleAvatar(
+                        radius: 60,
+                        backgroundImage: FileImage(_imageFile!),
+                      )
+                    else
+                      CustomAvatar(
+                        imageUrl: widget.user.profilePic,
+                        name: widget.user.name,
+                        radius: 60,
+                      ),
                     Positioned(
                       bottom: 0,
                       right: 0,

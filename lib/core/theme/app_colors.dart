@@ -11,11 +11,11 @@ class AppColors {
   static final Color disabledText = Colors.grey[600]!;
 
   static const _palette = [
-    Color(0xFF7B2CBF),
-    Color(0xFF9D4EDD),
-    Color(0xFF5E60CE),
-    Color(0xFF48CAE4),
-    Color(0xFF06D6A0),
+    Color(0xFF611E9C),
+    Color(0xFF8F45CB),
+    Color(0xFF5052C6),
+    Color(0xFF47ADC1),
+    Color(0xFF39B091),
   ];
 
   static Color avatarColor(String name) =>

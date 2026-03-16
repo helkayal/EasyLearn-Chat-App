@@ -32,33 +32,37 @@ class ChatInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextField(
-              controller: controller,
-              decoration: InputDecoration(
-                hintText: 'Message',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(24),
+    return SafeArea(
+      bottom: true,
+      top: false,
+      child: Padding(
+        padding: const EdgeInsets.all(8),
+        child: Row(
+          children: [
+            Expanded(
+              child: TextField(
+                controller: controller,
+                decoration: InputDecoration(
+                  hintText: 'Message',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(24),
+                  ),
+                  contentPadding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                    vertical: 10,
+                  ),
                 ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 10,
-                ),
+                textCapitalization: TextCapitalization.sentences,
+                onSubmitted: (_) => _send(context),
               ),
-              textCapitalization: TextCapitalization.sentences,
-              onSubmitted: (_) => _send(context),
             ),
-          ),
-          const SizedBox(width: 8),
-          IconButton.filled(
-            onPressed: () => _send(context),
-            icon: const Icon(Icons.send),
-          ),
-        ],
+            const SizedBox(width: 8),
+            IconButton.filled(
+              onPressed: () => _send(context),
+              icon: const Icon(Icons.send),
+            ),
+          ],
+        ),
       ),
     );
   }

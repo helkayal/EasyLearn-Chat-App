@@ -40,7 +40,7 @@ class MessageBubble extends StatelessWidget {
       decoration: BoxDecoration(
         color: isMe
             ? theme.primaryColor
-            : theme.colorScheme.surfaceContainerHighest,
+            : theme.primaryColor.withValues(alpha: 0.1),
         borderRadius: BorderRadius.only(
           topLeft: const Radius.circular(16),
           topRight: const Radius.circular(16),
@@ -59,14 +59,14 @@ class MessageBubble extends StatelessWidget {
               style: theme.textTheme.labelSmall?.copyWith(
                 color: AppColors.avatarColor(message.senderName),
                 fontWeight: FontWeight.bold,
-                fontSize: 11,
+                fontSize: 12,
               ),
             ),
             const SizedBox(height: 2),
           ],
           Text(
             message.text!,
-            style: theme.textTheme.bodyMedium?.copyWith(
+            style: theme.textTheme.bodyLarge?.copyWith(
               color: isMe ? theme.colorScheme.onPrimary : null,
             ),
           ),

@@ -46,11 +46,6 @@ class ContactTile extends StatelessWidget {
                 ],
               ),
             ),
-            Icon(
-              Icons.chat_bubble_outline,
-              color: theme.primaryColor,
-              size: 22,
-            ),
           ],
         ),
       ),
