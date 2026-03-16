@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/theme/app_colors.dart'; //
+import '../../../../core/theme/app_colors.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../../model/onboarding_model.dart';
 import '../cubit/onboarding_cubit.dart';
@@ -38,7 +38,6 @@ class BottomView extends StatelessWidget {
                   Expanded(
                     child: ActionButton(
                       label: "Previous",
-                      // Use semantic colors from AppColors
                       backgroundColor: isFirst
                           ? AppColors.disabledButton
                           : theme.primaryColor,

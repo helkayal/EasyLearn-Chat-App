@@ -107,9 +107,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         name: _nameController.text.trim(),
                         email: widget.user.email,
                         status: _statusController.text.trim(),
-                        profilePic: widget
-                            .user
-                            .profilePic, // Still using old pic until Storage added
+                        profilePic: widget.user.profilePic,
                       );
                       context.read<ProfileCubit>().updateProfile(updatedUser);
                     },

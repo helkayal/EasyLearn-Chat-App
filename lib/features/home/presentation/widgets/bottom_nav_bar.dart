@@ -17,10 +17,7 @@ class CustomBottomNavBar extends StatelessWidget {
               icon: Icon(Icons.home_outlined),
               label: "Home",
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person_add_outlined),
-              label: "Profile",
-            ),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: "Profile"),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_outlined),
               label: "Settings",
