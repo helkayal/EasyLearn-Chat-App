@@ -8,12 +8,16 @@ class ChatItemCard extends StatelessWidget {
   final ChatModel chat;
   final UserModel? otherUser;
   final int unreadCount;
+  final bool isFavorite;
+  final VoidCallback? onFavoriteToggle;
 
   const ChatItemCard({
     super.key,
     required this.chat,
     this.otherUser,
     this.unreadCount = 0,
+    this.isFavorite = false,
+    this.onFavoriteToggle,
   });
 
   @override
@@ -31,6 +35,8 @@ class ChatItemCard extends StatelessWidget {
         chat: chat,
         otherUser: otherUser,
         unreadCount: unreadCount,
+        isFavorite: isFavorite,
+        onFavoriteToggle: onFavoriteToggle,
       ),
     );
   }

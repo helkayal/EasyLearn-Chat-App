@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../model/chat_model.dart';
+import '../services/chat_service.dart';
 import 'chat_info_state.dart';
 
 class ChatInfoCubit extends Cubit<ChatInfoState> {
@@ -22,6 +23,16 @@ class ChatInfoCubit extends Cubit<ChatInfoState> {
         emit(ChatInfoLoaded(ChatModel.fromMap(snap.data()!, snap.id)));
       }
     }, onError: (e) => emit(ChatInfoError(e.toString())));
+  }
+
+  Future<void> toggleFavorite({
+    required String chatId,
+    required String currentUserId,
+  }) async {
+    await ChatService.toggleFavorite(
+      chatId: chatId,
+      currentUserId: currentUserId,
+    );
   }
 
   @override

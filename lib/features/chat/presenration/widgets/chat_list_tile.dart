@@ -9,12 +9,16 @@ class ChatListTile extends StatelessWidget {
   final ChatModel chat;
   final UserModel? otherUser;
   final int unreadCount;
+  final bool isFavorite;
+  final VoidCallback? onFavoriteToggle;
 
   const ChatListTile({
     super.key,
     required this.chat,
     this.otherUser,
     this.unreadCount = 0,
+    this.isFavorite = false,
+    this.onFavoriteToggle,
   });
 
   String get _displayName {
@@ -95,6 +99,17 @@ class ChatListTile extends StatelessWidget {
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
+          if (onFavoriteToggle != null) ...[
+            GestureDetector(
+              onTap: onFavoriteToggle,
+              child: Icon(
+                isFavorite ? Icons.star : Icons.star_border,
+                color: isFavorite ? Colors.orange : theme.disabledColor,
+                size: 20,
+              ),
+            ),
+            const SizedBox(width: 6),
+          ],
           if (_timeText.isNotEmpty)
             Text(
               _timeText,

@@ -107,6 +107,25 @@ class ChatViewState extends State<ChatView> {
               onPressed: () => Navigator.pop(context),
             ),
             actions: [
+              if (chat != null)
+                IconButton(
+                  icon: Icon(
+                    chat.favoritedByUserIds.contains(widget.currentUserId)
+                        ? Icons.star
+                        : Icons.star_border,
+                    color:
+                        chat.favoritedByUserIds.contains(widget.currentUserId)
+                        ? Colors.orange
+                        : theme.disabledColor,
+                  ),
+                  tooltip: 'Favorite chat',
+                  onPressed: () {
+                    context.read<ChatInfoCubit>().toggleFavorite(
+                      chatId: widget.chatId,
+                      currentUserId: widget.currentUserId,
+                    );
+                  },
+                ),
               IconButton(
                 icon: const Icon(Icons.person_add_alt_1),
                 tooltip: 'Add participants',

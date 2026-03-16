@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter_bloc/flutter_bloc.dart';
+
 import '../../../auth/model/user_model.dart';
 import '../../model/chat_model.dart';
+import '../cubit/chats_cubit.dart';
 import '../screens/chat_screen.dart';
 import 'chat_item_card.dart';
 
@@ -51,6 +54,13 @@ class ChatsList extends StatelessWidget {
             chat: chat,
             otherUser: otherUser,
             unreadCount: chat.unreadCountFor(currentUserId),
+            isFavorite: chat.favoritedByUserIds.contains(currentUserId),
+            onFavoriteToggle: () {
+              context.read<ChatsCubit>().toggleFavorite(
+                chatId: chat.id,
+                currentUserId: currentUserId,
+              );
+            },
           ),
         );
       },
