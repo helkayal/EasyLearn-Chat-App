@@ -27,11 +27,9 @@ class CustomAvatar extends StatelessWidget {
       backgroundColor: AppColors.avatarColor(name),
       child: Text(
         name.isNotEmpty ? name[0].toUpperCase() : '?',
-        style: TextStyle(
-          color: Colors.white,
-          fontWeight: FontWeight.bold,
-          fontSize: radius * 0.6,
-        ),
+        style: Theme.of(
+          context,
+        ).textTheme.labelMedium!.copyWith(fontSize: radius * 0.6),
       ),
     );
   }

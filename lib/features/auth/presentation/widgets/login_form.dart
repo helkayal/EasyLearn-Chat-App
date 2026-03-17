@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
@@ -72,7 +71,7 @@ class _LoginFormState extends State<LoginForm> {
               return ActionButton(
                 label: "Login",
                 backgroundColor: theme.primaryColor,
-                textColor: AppColors.white,
+                textColor: theme.colorScheme.onPrimary,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<LoginCubit>().login(

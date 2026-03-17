@@ -74,7 +74,7 @@ class _SignupFormState extends State<SignupForm> {
               return ActionButton(
                 label: "Create Account",
                 backgroundColor: theme.primaryColor,
-                textColor: Colors.white,
+                textColor: theme.colorScheme.onPrimary,
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     context.read<SignupCubit>().signUp(

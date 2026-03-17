@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../../../core/theme/app_colors.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../../model/onboarding_model.dart';
 import '../cubit/onboarding_cubit.dart';
@@ -17,7 +16,7 @@ class BottomView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); //
+    final theme = Theme.of(context);
 
     return BlocBuilder<OnboardingCubit, OnboardingState>(
       builder: (context, state) {
@@ -39,11 +38,11 @@ class BottomView extends StatelessWidget {
                     child: ActionButton(
                       label: "Previous",
                       backgroundColor: isFirst
-                          ? AppColors.disabledButton
+                          ? theme.colorScheme.onSurface
                           : theme.primaryColor,
                       textColor: isFirst
-                          ? AppColors.disabledText
-                          : AppColors.white,
+                          ? theme.colorScheme.onSurface
+                          : theme.colorScheme.onPrimary,
                       onPressed: isFirst
                           ? () {}
                           : () {
@@ -59,7 +58,7 @@ class BottomView extends StatelessWidget {
                     child: ActionButton(
                       label: isLast ? "Get Started" : "Next",
                       backgroundColor: theme.primaryColor, //
-                      textColor: AppColors.white, //
+                      textColor: theme.colorScheme.onPrimary, //
                       onPressed: () async {
                         if (isLast) {
                           await context

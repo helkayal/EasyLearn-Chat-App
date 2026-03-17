@@ -16,12 +16,18 @@ class GroupAvatarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     final ids = participantIds.take(3).toList();
     if (ids.isEmpty) {
       return CircleAvatar(
         radius: radius,
-        backgroundColor: const Color(0xFF7B2CBF),
-        child: Icon(Icons.group, color: Colors.white, size: radius),
+        backgroundColor: theme.colorScheme.primary,
+        child: Icon(
+          Icons.group,
+          color: theme.colorScheme.surface,
+          size: radius,
+        ),
       );
     }
 
@@ -31,11 +37,7 @@ class GroupAvatarWidget extends StatelessWidget {
         backgroundColor: AppColors.avatarColor(ids[0]),
         child: Text(
           _initial(ids[0]),
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontSize: radius * 0.7,
-          ),
+          style: theme.textTheme.labelMedium!.copyWith(fontSize: radius * .7),
         ),
       );
     }
@@ -51,16 +53,14 @@ class GroupAvatarWidget extends StatelessWidget {
               left: i * radius * 0.7,
               child: CircleAvatar(
                 radius: radius * 0.75,
-                backgroundColor: Colors.white,
+                backgroundColor: theme.colorScheme.surface,
                 child: CircleAvatar(
                   radius: radius * 0.72,
                   backgroundColor: AppColors.avatarColor(ids[i]),
                   child: Text(
                     _initial(ids[i]),
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: radius * 0.55,
+                    style: theme.textTheme.labelMedium!.copyWith(
+                      fontSize: radius * .55,
                     ),
                   ),
                 ),

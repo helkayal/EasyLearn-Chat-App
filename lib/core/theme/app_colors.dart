@@ -7,6 +7,7 @@ class AppColors {
   static const Color textBlack = Color(0xFF000000);
   static const Color errorRed = Color(0xFFE73A3A);
   static const Color white = Colors.white;
+  static const Color orange = Colors.orange;
   static final Color disabledButton = Colors.grey[300]!;
   static final Color disabledText = Colors.grey[600]!;
 

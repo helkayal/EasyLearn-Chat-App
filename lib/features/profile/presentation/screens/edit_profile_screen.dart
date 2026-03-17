@@ -79,9 +79,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       child: CircleAvatar(
                         backgroundColor: theme.primaryColor,
                         radius: 18,
-                        child: const Icon(
+                        child: Icon(
                           Icons.camera_alt,
-                          color: Colors.white,
+                          color: theme.colorScheme.onPrimary,
                           size: 18,
                         ),
                       ),
@@ -105,7 +105,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   return ActionButton(
                     label: "Save Changes",
                     backgroundColor: theme.primaryColor,
-                    textColor: Colors.white,
+                    textColor: theme.colorScheme.onPrimary,
                     onPressed: () {
                       final updatedUser = UserModel(
                         uid: widget.user.uid,

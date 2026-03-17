@@ -76,7 +76,7 @@ class ChatListTile extends StatelessWidget {
       title: Row(
         children: [
           if (chat.isGroup) ...[
-            const Icon(Icons.group, size: 14, color: Colors.grey),
+            Icon(Icons.group, size: 14, color: theme.colorScheme.onTertiary),
             const SizedBox(width: 4),
           ],
           Expanded(
@@ -104,7 +104,9 @@ class ChatListTile extends StatelessWidget {
               onTap: onFavoriteToggle,
               child: Icon(
                 isFavorite ? Icons.star : Icons.star_border,
-                color: isFavorite ? Colors.orange : theme.disabledColor,
+                color: isFavorite
+                    ? theme.colorScheme.tertiary
+                    : theme.colorScheme.onTertiary,
                 size: 20,
               ),
             ),

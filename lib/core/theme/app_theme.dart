@@ -12,8 +12,10 @@ class AppTheme {
       primary: AppColors.primaryPurple,
       onPrimary: AppColors.white,
       surface: AppColors.white,
-      error: AppColors.errorRed,
       onSurface: AppColors.textBlack,
+      tertiary: AppColors.orange,
+      onTertiary: AppColors.textGrey,
+      error: AppColors.errorRed,
     ),
 
     scaffoldBackgroundColor: AppColors.white,
@@ -25,6 +27,7 @@ class AppTheme {
       bodyLarge: AppTextStyles.labelMedium,
       bodyMedium: AppTextStyles.bodyGrey,
       labelLarge: AppTextStyles.buttonText,
+      labelMedium: AppTextStyles.whiteText,
     ),
 
     // 3. Button Themes

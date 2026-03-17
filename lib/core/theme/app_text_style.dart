@@ -29,4 +29,9 @@ class AppTextStyles {
     fontSize: 18,
     fontWeight: FontWeight.w600,
   );
+
+  static const TextStyle whiteText = TextStyle(
+    fontWeight: FontWeight.w700,
+    color: AppColors.white,
+  );
 }
