@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/custom_avatar.dart';
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/group_management_cubit.dart';
 import '../cubit/group_management_state.dart';
 
@@ -18,7 +19,7 @@ class ParticipantUserList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (state is GroupManagementLoading || state is GroupManagementInitial) {
-      return const Center(child: CircularProgressIndicator());
+      return const CustomLoadingIndicator();
     }
     if (state is GroupManagementError) {
       return Center(

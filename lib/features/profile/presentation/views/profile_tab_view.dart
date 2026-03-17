@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../auth/presentation/screens/login_screen.dart';
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/profile_cubit.dart';
 import '../cubit/profile_state.dart';
 import '../widgets/profile_tab_body.dart';
@@ -17,7 +18,7 @@ class ProfileTabView extends StatelessWidget {
     return BlocBuilder<ProfileCubit, ProfileState>(
       builder: (context, state) {
         if (state is ProfileLoading || state is ProfileInitial) {
-          return const Center(child: CircularProgressIndicator());
+          return const CustomLoadingIndicator();
         }
 
         final user = (state is ProfileLoaded)

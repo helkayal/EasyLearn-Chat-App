@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/snackbar_helper.dart';
 import '../../../home/presentation/screens/home_screen.dart';
 import '../cubit/login_cubit.dart';
 import '../cubit/login_states.dart';
@@ -13,8 +14,6 @@ class LoginScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context); //
-
     return BlocProvider(
       create: (context) => LoginCubit(),
       child: Scaffold(
@@ -27,12 +26,7 @@ class LoginScreen extends StatelessWidget {
                 (route) => false,
               );
             } else if (state is LoginError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: theme.colorScheme.error,
-                ),
-              );
+              SnackbarHelper.show(context, state.message, isError: true);
             }
           },
           child: const SafeArea(

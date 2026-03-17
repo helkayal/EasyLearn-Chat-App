@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/snackbar_helper.dart';
 import '../../../../core/widgets/custom_avatar.dart';
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../model/chat_model.dart';
 import '../cubit/chat_info_cubit.dart';
 import '../cubit/chat_info_state.dart';
@@ -139,7 +141,7 @@ class ChatViewState extends State<ChatView> {
                 child: BlocBuilder<MessagesCubit, MessagesState>(
                   builder: (context, state) {
                     if (state is MessagesLoading || state is MessagesInitial) {
-                      return const Center(child: CircularProgressIndicator());
+                      return const CustomLoadingIndicator();
                     }
                     if (state is MessagesError) {
                       return Center(
@@ -198,12 +200,9 @@ class ChatViewState extends State<ChatView> {
     );
 
     if (added == true && context.mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(
-            isGroup ? 'Participants added!' : 'Group created successfully!',
-          ),
-        ),
+      SnackbarHelper.show(
+        context,
+        isGroup ? 'Participants added!' : 'Group created successfully!',
       );
     }
   }

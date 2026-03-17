@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/snackbar_helper.dart';
 import '../cubit/group_management_cubit.dart';
 import '../cubit/group_management_state.dart';
 import 'participant_sheet_content.dart';
@@ -67,9 +68,7 @@ class _AddParticipantsSheetState extends State<AddParticipantsSheet> {
           if (state is GroupManagementSuccess) {
             Navigator.of(context).pop(state.newChatId ?? true);
           } else if (state is GroupManagementError) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(state.message)));
+            SnackbarHelper.show(context, state.message, isError: true);
           }
         },
         builder: (context, state) {

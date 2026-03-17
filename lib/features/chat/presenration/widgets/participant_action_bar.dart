@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/group_management_state.dart';
 
 class ParticipantActionBar extends StatelessWidget {
@@ -40,10 +41,7 @@ class ParticipantActionBar extends StatelessWidget {
                 ? const SizedBox(
                     width: 18,
                     height: 18,
-                    child: CircularProgressIndicator(
-                      strokeWidth: 2,
-                      color: Colors.white,
-                    ),
+                    child: CustomLoadingIndicator(color: Colors.white),
                   )
                 : const Icon(Icons.person_add),
             label: Text(

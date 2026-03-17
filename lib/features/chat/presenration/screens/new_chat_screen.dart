@@ -2,6 +2,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/snackbar_helper.dart';
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/new_chat_cubit.dart';
 import '../cubit/new_chat_state.dart';
 import '../widgets/contact_list.dart';
@@ -69,14 +71,12 @@ class _NewChatViewState extends State<_NewChatView> {
             child: BlocConsumer<NewChatCubit, NewChatState>(
               listener: (context, state) {
                 if (state is NewChatError) {
-                  ScaffoldMessenger.of(
-                    context,
-                  ).showSnackBar(SnackBar(content: Text(state.message)));
+                  SnackbarHelper.show(context, state.message, isError: true);
                 }
               },
               builder: (context, state) {
                 if (state is NewChatLoading || state is NewChatInitial) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const CustomLoadingIndicator();
                 }
 
                 if (state is NewChatError) {
@@ -89,7 +89,7 @@ class _NewChatViewState extends State<_NewChatView> {
                 }
 
                 if (state is NewChatCreating) {
-                  return const Center(child: CircularProgressIndicator());
+                  return const CustomLoadingIndicator();
                 }
 
                 if (state is NewChatLoaded) {

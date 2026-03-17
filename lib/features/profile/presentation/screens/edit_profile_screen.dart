@@ -3,7 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
+import '../../../../core/utils/snackbar_helper.dart';
 import '../../../../core/widgets/custom_avatar.dart';
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../auth/model/user_model.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
@@ -48,9 +50,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: BlocListener<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileSuccess) {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(const SnackBar(content: Text("Profile Updated!")));
+            SnackbarHelper.show(context, "Profile Updated!");
             Navigator.pop(context);
           }
         },
@@ -100,7 +100,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
                   if (state is ProfileLoading) {
-                    return const CircularProgressIndicator();
+                    return const CustomLoadingIndicator();
                   }
                   return ActionButton(
                     label: "Save Changes",

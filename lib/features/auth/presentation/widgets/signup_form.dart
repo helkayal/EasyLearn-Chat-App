@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
 import '../cubit/signup_cubit.dart';
@@ -68,7 +69,7 @@ class _SignupFormState extends State<SignupForm> {
           BlocBuilder<SignupCubit, SignupState>(
             builder: (context, state) {
               if (state is SignupLoading) {
-                return CircularProgressIndicator(color: theme.primaryColor);
+                return CustomLoadingIndicator(color: theme.primaryColor);
               }
               return ActionButton(
                 label: "Create Account",

@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/chat_category_cubit.dart';
 import '../cubit/chats_cubit.dart';
 import '../cubit/chats_state.dart';
@@ -51,7 +52,7 @@ class ChatViewBody extends StatelessWidget {
   }
 
   Widget _buildLoading() {
-    return const Center(child: CircularProgressIndicator());
+    return const CustomLoadingIndicator();
   }
 
   Widget _buildError(String message) {

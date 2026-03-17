@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/utils/snackbar_helper.dart';
 import '../../../auth/model/user_model.dart';
 import '../cubit/new_chat_cubit.dart';
 import '../screens/chat_screen.dart';
@@ -37,9 +38,7 @@ class ContactList extends StatelessWidget {
       );
     } catch (e) {
       if (context.mounted) {
-        ScaffoldMessenger.of(
-          context,
-        ).showSnackBar(SnackBar(content: Text(e.toString())));
+        SnackbarHelper.show(context, e.toString(), isError: true);
       }
     }
   }

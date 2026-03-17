@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../../../core/utils/snackbar_helper.dart';
 import '../cubit/signup_cubit.dart';
 import '../cubit/signup_state.dart';
 import '../widgets/signup_form.dart';
@@ -17,13 +18,9 @@ class SignupScreen extends StatelessWidget {
         body: BlocListener<SignupCubit, SignupState>(
           listener: (context, state) {
             if (state is SignupSuccess) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(
-                  content: Text(
-                    "Account created! Please check your email to verify your account.",
-                  ),
-                  duration: Duration(seconds: 5),
-                ),
+              SnackbarHelper.show(
+                context,
+                "Account created! Please check your email to verify your account.",
               );
               Navigator.pushAndRemoveUntil(
                 context,
@@ -31,12 +28,7 @@ class SignupScreen extends StatelessWidget {
                 (route) => false,
               );
             } else if (state is SignupError) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(state.message),
-                  backgroundColor: Theme.of(context).colorScheme.error,
-                ),
-              );
+              SnackbarHelper.show(context, state.message, isError: true);
             }
           },
           child: const SafeArea(
