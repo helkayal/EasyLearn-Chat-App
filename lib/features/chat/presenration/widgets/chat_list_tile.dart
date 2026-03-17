@@ -76,7 +76,7 @@ class ChatListTile extends StatelessWidget {
       title: Row(
         children: [
           if (chat.isGroup) ...[
-            Icon(Icons.group, size: 14, color: theme.colorScheme.onTertiary),
+            Icon(Icons.group, size: 14, color: theme.colorScheme.secondary),
             const SizedBox(width: 4),
           ],
           Expanded(
@@ -105,8 +105,8 @@ class ChatListTile extends StatelessWidget {
               child: Icon(
                 isFavorite ? Icons.star : Icons.star_border,
                 color: isFavorite
-                    ? theme.colorScheme.tertiary
-                    : theme.colorScheme.onTertiary,
+                    ? theme.colorScheme.surface
+                    : theme.colorScheme.secondary,
                 size: 20,
               ),
             ),

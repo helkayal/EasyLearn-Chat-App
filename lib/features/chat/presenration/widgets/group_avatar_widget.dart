@@ -25,7 +25,7 @@ class GroupAvatarWidget extends StatelessWidget {
         backgroundColor: theme.colorScheme.primary,
         child: Icon(
           Icons.group,
-          color: theme.colorScheme.surface,
+          color: theme.colorScheme.onPrimary,
           size: radius,
         ),
       );
@@ -53,7 +53,7 @@ class GroupAvatarWidget extends StatelessWidget {
               left: i * radius * 0.7,
               child: CircleAvatar(
                 radius: radius * 0.75,
-                backgroundColor: theme.colorScheme.surface,
+                backgroundColor: theme.colorScheme.onPrimary,
                 child: CircleAvatar(
                   radius: radius * 0.72,
                   backgroundColor: AppColors.avatarColor(ids[i]),

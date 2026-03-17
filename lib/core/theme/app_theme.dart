@@ -6,21 +6,21 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
 
-    // 1. Defining the ColorScheme
     colorScheme: ColorScheme.fromSeed(
       seedColor: AppColors.primaryPurple,
       primary: AppColors.primaryPurple,
       onPrimary: AppColors.white,
-      surface: AppColors.white,
+      secondary: AppColors.textGrey,
+      onSecondary: AppColors.secondaryGrey,
+      surface: AppColors.orange,
       onSurface: AppColors.textBlack,
-      tertiary: AppColors.orange,
-      onTertiary: AppColors.textGrey,
+      tertiary: AppColors.disabledButton,
+      onTertiary: AppColors.disabledText,
       error: AppColors.errorRed,
     ),
 
     scaffoldBackgroundColor: AppColors.white,
 
-    // 2. Text Theme
     textTheme: const TextTheme(
       displayLarge: AppTextStyles.headingBold,
       displayMedium: AppTextStyles.subHeadingBold,
@@ -30,7 +30,8 @@ class AppTheme {
       labelMedium: AppTextStyles.whiteText,
     ),
 
-    // 3. Button Themes
+    appBarTheme: AppBarTheme(backgroundColor: AppColors.secondaryGrey),
+
     textButtonTheme: TextButtonThemeData(
       style: TextButton.styleFrom(
         foregroundColor: AppColors.textGrey,
@@ -38,7 +39,6 @@ class AppTheme {
       ),
     ),
 
-    // 4. Input Decoration Theme
     inputDecorationTheme: InputDecorationTheme(
       contentPadding: const EdgeInsets.symmetric(horizontal: 20, vertical: 18),
       border: OutlineInputBorder(
@@ -56,19 +56,16 @@ class AppTheme {
       ),
     ),
 
-    // 5. Divider Theme
     dividerTheme: const DividerThemeData(
       color: AppColors.secondaryGrey,
       thickness: 1,
     ),
 
-    // 6. SnackBar Theme
     snackBarTheme: const SnackBarThemeData(
       backgroundColor: AppColors.primaryPurple,
       contentTextStyle: AppTextStyles.buttonText,
     ),
 
-    // 7. BottomNavigationBar Theme
     bottomNavigationBarTheme: const BottomNavigationBarThemeData(
       backgroundColor: AppColors.white,
       selectedItemColor: AppColors.primaryPurple,

@@ -117,8 +117,8 @@ class ChatViewState extends State<ChatView> {
                         : Icons.star_border,
                     color:
                         chat.favoritedByUserIds.contains(widget.currentUserId)
-                        ? Colors.orange
-                        : theme.disabledColor,
+                        ? theme.colorScheme.surface
+                        : theme.colorScheme.onTertiary,
                   ),
                   tooltip: 'Favorite chat',
                   onPressed: () {
