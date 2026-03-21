@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../chat/presenration/views/chats_tab_view.dart';
 import '../../../profile/presentation/cubit/profile_cubit.dart';
 import '../../../profile/presentation/views/profile_tab_view.dart';
+import '../../../settings/presenration/view/settings_tab_view.dart';
 import '../cubit/navigation_cubit.dart';
 import '../widgets/bottom_nav_bar.dart';
 
@@ -24,7 +25,7 @@ class HomeScreen extends StatelessWidget {
               children: const [
                 ChatsTabView(),
                 ProfileTabView(),
-                Center(child: Text("Settings Screen")),
+                SettingsTabView(),
               ],
             );
           },

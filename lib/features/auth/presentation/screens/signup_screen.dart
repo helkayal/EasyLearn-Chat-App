@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../core/utils/snackbar_helper.dart';
 import '../cubit/signup_cubit.dart';
 import '../cubit/signup_state.dart';
+import '../widgets/signin_row.dart';
 import '../widgets/signup_form.dart';
 import '../widgets/signup_header.dart';
 import 'login_screen.dart';
@@ -35,7 +36,12 @@ class SignupScreen extends StatelessWidget {
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: 24, vertical: 10),
               child: Column(
-                children: [SignupHeader(), SizedBox(height: 30), SignupForm()],
+                children: [
+                  SignupHeader(),
+                  SizedBox(height: 30),
+                  SignupForm(),
+                  SigninRow(),
+                ],
               ),
             ),
           ),

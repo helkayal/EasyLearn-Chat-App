@@ -20,16 +20,13 @@ class ChatSearchBar extends StatelessWidget {
             child: Container(
               padding: const EdgeInsets.symmetric(horizontal: 15),
               decoration: BoxDecoration(
-                color: theme.dividerTheme.color?.withValues(alpha: 0.2),
+                color: theme.colorScheme.secondary.withValues(alpha: .2),
                 borderRadius: BorderRadius.circular(15),
               ),
               child: TextField(
                 onChanged: onChanged,
                 decoration: InputDecoration(
-                  icon: Icon(
-                    Icons.search,
-                    color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
-                  ),
+                  icon: Icon(Icons.search),
                   hintText: "Search Chat",
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
