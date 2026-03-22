@@ -32,7 +32,12 @@
     "password_label": "Password",
     "password_length_error": "Password must be 6+ characters",
     "happy_to_see_you": "Happy to see you again, to use your account please login first.",
-    "forgot_password": "Forgot Password"
+    "forgot_password": "Forgot Password",
+    "reset_password_title": "Reset Password",
+    "reset_password_desc": "Enter your email to receive a password reset link.",
+    "send_link": "Send Link",
+    "password_reset_sent": "Password reset link sent! Check your email.",
+    "cancel": "Cancel"
   },
   "signup": {
     "title": "Sign Up",

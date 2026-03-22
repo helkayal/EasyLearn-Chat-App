@@ -32,4 +32,16 @@ class LoginCubit extends Cubit<LoginState> {
       emit(LoginError(e.message ?? "Authentication failed"));
     }
   }
+
+  Future<void> sendPasswordResetEmail(String email) async {
+    if (email.trim().isEmpty) return;
+
+    emit(PasswordResetLoading());
+    try {
+      await FirebaseAuth.instance.sendPasswordResetEmail(email: email.trim());
+      emit(PasswordResetSuccess());
+    } on FirebaseAuthException catch (e) {
+      emit(PasswordResetError(e.message ?? "Failed to send reset email"));
+    }
+  }
 }

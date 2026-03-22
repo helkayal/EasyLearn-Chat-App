@@ -35,6 +35,11 @@ abstract class  LocaleKeys {
   static const login_password_length_error = 'login.password_length_error';
   static const login_happy_to_see_you = 'login.happy_to_see_you';
   static const login_forgot_password = 'login.forgot_password';
+  static const login_reset_password_title = 'login.reset_password_title';
+  static const login_reset_password_desc = 'login.reset_password_desc';
+  static const login_send_link = 'login.send_link';
+  static const login_password_reset_sent = 'login.password_reset_sent';
+  static const login_cancel = 'login.cancel';
   static const login = 'login';
   static const signup_title = 'signup.title';
   static const signup_name_hint = 'signup.name_hint';

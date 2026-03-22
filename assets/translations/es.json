@@ -31,8 +31,13 @@
     "email_invalid_error": "Introduce un correo válido",
     "password_label": "Contraseña",
     "password_length_error": "La contraseña debe tener más de 6 caracteres",
-    "happy_to_see_you": "Nos alegra verte de nuevo. Inicia sesión para continuar.",
-    "forgot_password": "¿Olvidaste tu contraseña?"
+    "happy_to_see_you": "Feliz de verte de nuevo, para usar tu cuenta, por favor inicia sesión primero.",
+    "forgot_password": "¿Olvidaste tu contraseña",
+    "reset_password_title": "Restablecer contraseña",
+    "reset_password_desc": "Ingresa tu correo electrónico para recibir un enlace de restablecimiento.",
+    "send_link": "Enviar enlace",
+    "password_reset_sent": "¡Enlace enviado! Revisa tu correo electrónico.",
+    "cancel": "Cancelar"
   },
   "signup": {
     "title": "Registrarse",

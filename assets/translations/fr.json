@@ -32,7 +32,12 @@
     "password_label": "Mot de passe",
     "password_length_error": "Le mot de passe doit comporter plus de 6 caractères",
     "happy_to_see_you": "Heureux de vous revoir. Connectez-vous pour continuer.",
-    "forgot_password": "Mot de passe oublié"
+    "forgot_password": "Mot de passe oublié",
+    "reset_password_title": "Réinitialiser le mot de passe",
+    "reset_password_desc": "Entrez votre e-mail pour recevoir un lien de réinitialisation.",
+    "send_link": "Envoyer le lien",
+    "password_reset_sent": "Lien envoyé ! Vérifiez vos e-mails.",
+    "cancel": "Annuler"
   },
   "signup": {
     "title": "Inscription",
