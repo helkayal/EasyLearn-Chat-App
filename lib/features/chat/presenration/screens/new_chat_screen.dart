@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../core/utils/snackbar_helper.dart';
 import '../../../../core/widgets/custom_loading_indicator.dart';
@@ -44,7 +47,7 @@ class _NewChatViewState extends State<_NewChatView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('New chat'),
+        title: Text(LocaleKeys.home_new_chat.tr()),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () => Navigator.pop(context),
@@ -57,7 +60,7 @@ class _NewChatViewState extends State<_NewChatView> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                hintText: 'Search by name or email',
+                hintText: LocaleKeys.chat_search_by_name_or_email.tr(),
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
@@ -99,8 +102,10 @@ class _NewChatViewState extends State<_NewChatView> {
                     return Center(
                       child: Text(
                         state.searchQuery.isEmpty
-                            ? 'No other users yet.'
-                            : 'No matches for "${state.searchQuery}"',
+                            ? LocaleKeys.chat_no_other_users_yet.tr()
+                            : LocaleKeys.chat_no_matches_for.tr(
+                                args: [state.searchQuery],
+                              ),
                         textAlign: TextAlign.center,
                       ),
                     );

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 import '../../model/onboarding_model.dart';
 import '../cubit/onboarding_cubit.dart';
@@ -30,10 +31,10 @@ class PageViewBuilder extends StatelessWidget {
             children: [
               Image.asset(data.image, height: 250),
               const SizedBox(height: 40),
-              Text(data.title, style: theme.textTheme.displayMedium),
+              Text(data.title.tr(), style: theme.textTheme.displayMedium),
               const SizedBox(height: 16),
               Text(
-                data.description,
+                data.description.tr(),
                 textAlign: TextAlign.center,
                 style: theme.textTheme.bodyMedium,
               ),

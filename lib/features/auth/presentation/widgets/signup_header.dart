@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 class SignupHeader extends StatelessWidget {
   const SignupHeader({super.key});
@@ -13,10 +16,13 @@ class SignupHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Create Account", style: textTheme.displayLarge),
+              Text(
+                LocaleKeys.signup_create_account.tr(),
+                style: textTheme.displayLarge,
+              ),
               const SizedBox(height: 10),
               Text(
-                "Join us today! Please fill in your details to get started.",
+                LocaleKeys.signup_join_us_today.tr(),
                 style: textTheme.bodyMedium,
               ),
             ],

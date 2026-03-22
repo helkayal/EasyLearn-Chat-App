@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../../model/onboarding_model.dart';
@@ -36,7 +39,7 @@ class BottomView extends StatelessWidget {
                 children: [
                   Expanded(
                     child: ActionButton(
-                      label: "Previous",
+                      label: LocaleKeys.onboarding_previous.tr(),
                       backgroundColor: isFirst
                           ? theme.colorScheme.onSurface
                           : theme.primaryColor,
@@ -56,7 +59,9 @@ class BottomView extends StatelessWidget {
                   const SizedBox(width: 10),
                   Expanded(
                     child: ActionButton(
-                      label: isLast ? "Get Started" : "Next",
+                      label: isLast
+                          ? LocaleKeys.onboarding_get_started.tr()
+                          : LocaleKeys.onboarding_next.tr(),
                       backgroundColor: theme.primaryColor, //
                       textColor: theme.colorScheme.onPrimary, //
                       onPressed: () async {

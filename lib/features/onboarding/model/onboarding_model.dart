@@ -1,3 +1,5 @@
+import '../../../../generated/locale_keys.g.dart';
+
 class OnboardingModel {
   final String title;
   final String description;
@@ -12,27 +14,23 @@ class OnboardingModel {
 
 List<OnboardingModel> onboardingPages = [
   OnboardingModel(
-    title: "Find Your Circle",
-    description:
-        "Discover friends and communities that share your interests. Search by name or interest to start building your network.",
+    title: LocaleKeys.onboarding_find_your_circle,
+    description: LocaleKeys.onboarding_find_your_circle_desc,
     image: "assets/images/onboarding1.png",
   ),
   OnboardingModel(
-    title: "Express Yourself",
-    description:
-        "Connect through rich messaging. Use emojis and reactions to bring your conversations to life.",
+    title: LocaleKeys.onboarding_express_yourself,
+    description: LocaleKeys.onboarding_express_yourself_desc,
     image: "assets/images/onboarding2.png",
   ),
   OnboardingModel(
-    title: "Face-to-Face Anytime",
-    description:
-        "High-quality video and voice calls that make you feel like you're in the same room, no matter the distance.",
+    title: LocaleKeys.onboarding_face_to_face,
+    description: LocaleKeys.onboarding_face_to_face_desc,
     image: "assets/images/onboarding3.png",
   ),
   OnboardingModel(
-    title: "Share the Moment",
-    description:
-        "Easily send photos, videos, and files. Keep your friends updated on your daily adventures with one tap.",
+    title: LocaleKeys.onboarding_share_the_moment,
+    description: LocaleKeys.onboarding_share_the_moment_desc,
     image: "assets/images/onboarding4.png",
   ),
 ];

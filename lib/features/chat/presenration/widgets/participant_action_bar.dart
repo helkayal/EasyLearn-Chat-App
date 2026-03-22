@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/widgets/custom_loading_indicator.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../cubit/group_management_state.dart';
 
 class ParticipantActionBar extends StatelessWidget {
@@ -46,8 +48,8 @@ class ParticipantActionBar extends StatelessWidget {
                 : const Icon(Icons.person_add),
             label: Text(
               isGroup
-                  ? 'Add ${selectedIds.isEmpty ? '' : '(${selectedIds.length})'}'
-                  : 'Create group',
+                  ? '${LocaleKeys.chat_add.tr()} ${selectedIds.isEmpty ? '' : '(${selectedIds.length})'}'
+                  : LocaleKeys.chat_create_group.tr(),
             ),
           ),
         ),

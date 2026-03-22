@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../core/utils/snackbar_helper.dart';
 import '../cubit/signup_cubit.dart';
 import '../cubit/signup_state.dart';
@@ -21,7 +24,7 @@ class SignupScreen extends StatelessWidget {
             if (state is SignupSuccess) {
               SnackbarHelper.show(
                 context,
-                "Account created! Please check your email to verify your account.",
+                LocaleKeys.signup_account_created_success.tr(),
               );
               Navigator.pushAndRemoveUntil(
                 context,

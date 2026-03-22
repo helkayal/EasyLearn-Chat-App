@@ -1,6 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/chat_category_cubit.dart';
@@ -60,7 +63,7 @@ class ChatViewBody extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Text(
-          'Something went wrong while loading chats.\n$message',
+          LocaleKeys.chat_something_went_wrong.tr(args: [message]),
           textAlign: TextAlign.center,
         ),
       ),
@@ -75,7 +78,7 @@ class ChatViewBody extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              "No chats yet.\nStart a new conversation!",
+              LocaleKeys.chat_no_chats_yet.tr(),
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyLarge,
             ),
@@ -83,7 +86,7 @@ class ChatViewBody extends StatelessWidget {
             FilledButton.icon(
               onPressed: () => _openNewChat(context),
               icon: const Icon(Icons.add_comment),
-              label: const Text('Start new chat'),
+              label: Text(LocaleKeys.chat_start_new_chat.tr()),
             ),
           ],
         ),
@@ -117,9 +120,9 @@ class ChatViewBody extends StatelessWidget {
     }
 
     if (visibleChats.isEmpty) {
-      return const Center(
+      return Center(
         child: Text(
-          "No chats in this category yet.",
+          LocaleKeys.chat_no_chats_in_category.tr(),
           textAlign: TextAlign.center,
         ),
       );
@@ -134,8 +137,8 @@ class ChatViewBody extends StatelessWidget {
                   .where((id) => id != currentUserId)
                   .firstOrNull];
         final title = chat.isGroup
-            ? (chat.groupName ?? 'Group')
-            : (otherUser?.name ?? 'Unknown');
+            ? (chat.groupName ?? LocaleKeys.chat_group.tr())
+            : (otherUser?.name ?? LocaleKeys.chat_unknown.tr());
 
         return title.toLowerCase().contains(q);
       }).toList();
@@ -143,7 +146,7 @@ class ChatViewBody extends StatelessWidget {
       if (visibleChats.isEmpty) {
         return Center(
           child: Text(
-            "No chats match '$_searchQuery'",
+            LocaleKeys.chat_no_chats_match.tr(args: [_searchQuery]),
             textAlign: TextAlign.center,
           ),
         );

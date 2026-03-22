@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../screens/login_screen.dart';
 
@@ -11,7 +14,10 @@ class SigninRow extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("Already have an account?", style: theme.textTheme.bodyMedium),
+        Text(
+          LocaleKeys.signup_already_have_account.tr(),
+          style: theme.textTheme.bodyMedium,
+        ),
         TextButton(
           onPressed: () {
             Navigator.pushAndRemoveUntil(
@@ -21,7 +27,7 @@ class SigninRow extends StatelessWidget {
             );
           },
           child: Text(
-            "Login",
+            LocaleKeys.signup_login.tr(),
             style: Theme.of(
               context,
             ).textTheme.bodyMedium!.copyWith(color: theme.colorScheme.primary),

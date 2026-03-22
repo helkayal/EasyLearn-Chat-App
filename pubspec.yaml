@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   cloud_firestore: ^6.1.2
+  easy_localization: ^3.0.8
   firebase_auth: ^6.1.4
   firebase_core: ^4.4.0
   flutter:
@@ -26,3 +27,4 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/translations/

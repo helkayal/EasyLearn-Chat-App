@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
@@ -36,34 +39,38 @@ class _SignupFormState extends State<SignupForm> {
       child: Column(
         children: [
           CustomTextField(
-            label: "Full Name",
+            label: LocaleKeys.signup_full_name_label.tr(),
             controller: _nameController,
-            hintText: "Enter your name",
-            validator: (v) => v!.isEmpty ? "Name is required" : null,
+            hintText: LocaleKeys.signup_name_hint.tr(),
+            validator: (v) =>
+                v!.isEmpty ? LocaleKeys.signup_name_empty_error.tr() : null,
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: "Email Address",
+            label: LocaleKeys.signup_email_address_label.tr(),
             controller: _emailController,
             hintText: "example@mail.com",
             validator: (value) {
-              if (value == null || value.isEmpty) return "Email is required";
+              if (value == null || value.isEmpty) {
+                return LocaleKeys.signup_email_empty_error.tr();
+              }
               if (!RegExp(
                 r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
               ).hasMatch(value)) {
-                return "Invalid email format";
+                return LocaleKeys.signup_email_invalid_error.tr();
               }
               return null;
             },
           ),
           const SizedBox(height: 20),
           CustomTextField(
-            label: "Password",
+            label: LocaleKeys.signup_password_label.tr(),
             controller: _passwordController,
             isPassword: true,
             hintText: "••••••••",
-            validator: (v) =>
-                v!.length < 6 ? "Minimum 6 characters required" : null,
+            validator: (v) => v!.length < 6
+                ? LocaleKeys.signup_password_length_error.tr()
+                : null,
           ),
           const SizedBox(height: 40),
           BlocBuilder<SignupCubit, SignupState>(
@@ -72,7 +79,7 @@ class _SignupFormState extends State<SignupForm> {
                 return CustomLoadingIndicator(color: theme.primaryColor);
               }
               return ActionButton(
-                label: "Create Account",
+                label: LocaleKeys.signup_create_account.tr(),
                 backgroundColor: theme.primaryColor,
                 textColor: theme.colorScheme.onPrimary,
                 onPressed: () {

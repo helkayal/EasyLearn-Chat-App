@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '../screens/new_chat_screen.dart';
 
 class ChatSearchBar extends StatelessWidget {
@@ -27,7 +29,7 @@ class ChatSearchBar extends StatelessWidget {
                 onChanged: onChanged,
                 decoration: InputDecoration(
                   icon: Icon(Icons.search),
-                  hintText: "Search Chat",
+                  hintText: LocaleKeys.chat_search_chat_hint.tr(),
                   border: InputBorder.none,
                   enabledBorder: InputBorder.none,
                   focusedBorder: InputBorder.none,

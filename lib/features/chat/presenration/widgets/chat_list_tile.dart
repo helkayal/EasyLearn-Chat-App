@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../core/widgets/custom_avatar.dart';
 import '../../../auth/model/user_model.dart';
 import '../../model/chat_model.dart';
@@ -22,8 +24,8 @@ class ChatListTile extends StatelessWidget {
   });
 
   String get _displayName {
-    if (chat.isGroup) return chat.groupName ?? 'Group';
-    return otherUser?.name ?? 'Unknown';
+    if (chat.isGroup) return chat.groupName ?? LocaleKeys.chat_group.tr();
+    return otherUser?.name ?? LocaleKeys.chat_unknown.tr();
   }
 
   Widget _buildAvatar() {
@@ -31,7 +33,7 @@ class ChatListTile extends StatelessWidget {
       if (chat.groupImage != null && chat.groupImage!.isNotEmpty) {
         return CustomAvatar(
           imageUrl: chat.groupImage!,
-          name: chat.groupName ?? 'Group',
+          name: chat.groupName ?? LocaleKeys.chat_group.tr(),
           radius: 30,
         );
       }
@@ -50,7 +52,10 @@ class ChatListTile extends StatelessWidget {
       return chat.lastMessage!;
     }
     if (chat.isGroup) {
-      return 'Group · ${chat.participantIds.length} members';
+      final name = chat.groupName ?? LocaleKeys.chat_group.tr();
+      return LocaleKeys.chat_group_members.tr(
+        args: [name, '${chat.participantIds.length}'],
+      );
     }
     return otherUser?.status ?? '';
   }

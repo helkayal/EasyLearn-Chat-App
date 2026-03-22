@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 class LoginHeader extends StatelessWidget {
   const LoginHeader({super.key});
@@ -13,11 +16,14 @@ class LoginHeader extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text("Hello, ", style: textTheme.displayMedium),
-              Text("Welcome Back", style: textTheme.displayMedium),
+              Text(LocaleKeys.login_hello.tr(), style: textTheme.displayMedium),
+              Text(
+                LocaleKeys.login_welcome_back.tr(),
+                style: textTheme.displayMedium,
+              ),
               const SizedBox(height: 10),
               Text(
-                "Happy to see you again, to use your account please login first.",
+                LocaleKeys.login_happy_to_see_you.tr(),
                 style: textTheme.bodyMedium,
               ),
             ],

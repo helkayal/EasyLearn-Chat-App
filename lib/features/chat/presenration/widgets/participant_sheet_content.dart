@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '../cubit/group_management_state.dart';
 import 'participant_action_bar.dart';
 import 'participant_user_list.dart';
@@ -46,7 +48,9 @@ class ParticipantSheetContent extends StatelessWidget {
               children: [
                 Expanded(
                   child: Text(
-                    isGroup ? 'Add participants' : 'Create group',
+                    isGroup
+                        ? LocaleKeys.chat_add_participants.tr()
+                        : LocaleKeys.chat_create_group.tr(),
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.bold,
                     ),
@@ -64,8 +68,8 @@ class ParticipantSheetContent extends StatelessWidget {
               child: TextField(
                 controller: groupNameController,
                 decoration: InputDecoration(
-                  labelText: 'Group name *',
-                  hintText: 'e.g. Study Group',
+                  labelText: LocaleKeys.chat_group_name_label.tr(),
+                  hintText: LocaleKeys.chat_group_hint_example.tr(),
                   prefixIcon: const Icon(Icons.group),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(12),
@@ -82,7 +86,7 @@ class ParticipantSheetContent extends StatelessWidget {
             child: TextField(
               controller: searchController,
               decoration: InputDecoration(
-                hintText: 'Search by name or email',
+                hintText: LocaleKeys.chat_search_by_name_or_email.tr(),
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),

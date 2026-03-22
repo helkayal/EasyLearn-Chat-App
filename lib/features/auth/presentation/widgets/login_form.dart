@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
@@ -35,16 +38,16 @@ class _LoginFormState extends State<LoginForm> {
       child: Column(
         children: [
           CustomTextField(
-            label: "Email Address",
+            label: LocaleKeys.login_email_address_label.tr(),
             controller: _emailController,
             hintText: "example@mail.com",
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return "Please enter your email";
+                return LocaleKeys.login_email_empty_error.tr();
               }
               final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$');
               if (!emailRegex.hasMatch(value)) {
-                return "Please enter a valid email address";
+                return LocaleKeys.login_email_invalid_error.tr();
               }
               return null;
             },
@@ -52,12 +55,13 @@ class _LoginFormState extends State<LoginForm> {
           const SizedBox(height: 20),
 
           CustomTextField(
-            label: "Password",
+            label: LocaleKeys.login_password_label.tr(),
             controller: _passwordController,
             isPassword: true,
             hintText: "••••••••",
-            validator: (v) =>
-                v!.length < 6 ? "Password must be 6+ characters" : null,
+            validator: (v) => v!.length < 6
+                ? LocaleKeys.login_password_length_error.tr()
+                : null,
           ),
 
           const ForgotPasswordButton(),
@@ -69,7 +73,7 @@ class _LoginFormState extends State<LoginForm> {
                 return CustomLoadingIndicator(color: theme.primaryColor);
               }
               return ActionButton(
-                label: "Login",
+                label: LocaleKeys.login_login_button.tr(),
                 backgroundColor: theme.primaryColor,
                 textColor: theme.colorScheme.onPrimary,
                 onPressed: () {

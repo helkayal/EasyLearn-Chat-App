@@ -22,15 +22,11 @@ class HomeScreen extends StatelessWidget {
           builder: (context, state) {
             return IndexedStack(
               index: state,
-              children: const [
-                ChatsTabView(),
-                ProfileTabView(),
-                SettingsTabView(),
-              ],
+              children: [ChatsTabView(), ProfileTabView(), SettingsTabView()],
             );
           },
         ),
-        bottomNavigationBar: const CustomBottomNavBar(),
+        bottomNavigationBar: CustomBottomNavBar(),
       ),
     );
   }

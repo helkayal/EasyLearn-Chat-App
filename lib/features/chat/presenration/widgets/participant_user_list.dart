@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '../../../../core/widgets/custom_avatar.dart';
 import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../cubit/group_management_cubit.dart';
@@ -53,8 +55,8 @@ class ParticipantUserList extends StatelessWidget {
         return Center(
           child: Text(
             searchQuery.isEmpty
-                ? 'No other users available.'
-                : 'No matches for "$searchQuery"',
+                ? LocaleKeys.chat_no_other_users_available.tr()
+                : LocaleKeys.chat_no_matches_for.tr(args: [searchQuery]),
             textAlign: TextAlign.center,
           ),
         );

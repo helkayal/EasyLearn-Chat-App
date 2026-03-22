@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 import 'social_icon.dart';
 
 class SocialLoginSection extends StatelessWidget {
@@ -14,7 +17,10 @@ class SocialLoginSection extends StatelessWidget {
             const Expanded(child: Divider()),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
-              child: Text("Or Login with", style: theme.textTheme.bodyMedium),
+              child: Text(
+                LocaleKeys.login_or_login_with.tr(),
+                style: theme.textTheme.bodyMedium,
+              ),
             ),
             const Expanded(child: Divider()),
           ],

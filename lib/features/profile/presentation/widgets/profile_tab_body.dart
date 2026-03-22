@@ -1,7 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/widgets/custom_avatar.dart';
+import '../../../../generated/locale_keys.g.dart';
 import '../../../auth/model/user_model.dart';
 import '../cubit/profile_cubit.dart';
 import '../screens/edit_profile_screen.dart';
@@ -70,7 +72,7 @@ class ProfileTabBody extends StatelessWidget {
               );
             },
             child: Text(
-              "Edit Profile",
+              LocaleKeys.profile_edit_profile.tr(),
               style: TextStyle(color: theme.primaryColor),
             ),
           ),

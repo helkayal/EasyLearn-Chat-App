@@ -1,4 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 class ForgotPasswordButton extends StatelessWidget {
   const ForgotPasswordButton({super.key});
@@ -15,7 +18,7 @@ class ForgotPasswordButton extends StatelessWidget {
           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
         ),
         child: Text(
-          "Forgot Password",
+          LocaleKeys.login_forgot_password.tr(),
           style: TextStyle(
             color: Theme.of(context).colorScheme.error,
             fontWeight: FontWeight.w500,

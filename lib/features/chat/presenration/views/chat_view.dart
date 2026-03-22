@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../core/utils/snackbar_helper.dart';
 import '../../../../core/widgets/custom_avatar.dart';
@@ -56,7 +59,7 @@ class ChatViewState extends State<ChatView> {
       if (chat.groupImage != null && chat.groupImage!.isNotEmpty) {
         return CustomAvatar(
           imageUrl: chat.groupImage!,
-          name: chat.groupName ?? 'Group',
+          name: chat.groupName ?? LocaleKeys.chat_group.tr(),
           radius: 18,
         );
       }
@@ -74,8 +77,8 @@ class ChatViewState extends State<ChatView> {
     if (chat == null) return widget.fallbackTitle;
     if (chat.isGroup) {
       final count = chat.participantIds.length;
-      final name = chat.groupName ?? 'Group';
-      return '$name · $count members';
+      final name = chat.groupName ?? LocaleKeys.chat_group.tr();
+      return LocaleKeys.chat_group_members.tr(args: [name, '$count']);
     }
     return widget.fallbackTitle;
   }
@@ -120,7 +123,7 @@ class ChatViewState extends State<ChatView> {
                         ? theme.colorScheme.surface
                         : theme.colorScheme.onTertiary,
                   ),
-                  tooltip: 'Favorite chat',
+                  tooltip: LocaleKeys.chat_favorite_chat.tr(),
                   onPressed: () {
                     context.read<ChatInfoCubit>().toggleFavorite(
                       chatId: widget.chatId,
@@ -130,7 +133,7 @@ class ChatViewState extends State<ChatView> {
                 ),
               IconButton(
                 icon: const Icon(Icons.person_add_alt_1),
-                tooltip: 'Add participants',
+                tooltip: LocaleKeys.chat_add_participants.tr(),
                 onPressed: () => _openAddParticipants(context, chat),
               ),
             ],
@@ -156,7 +159,7 @@ class ChatViewState extends State<ChatView> {
                       if (messages.isEmpty) {
                         return Center(
                           child: Text(
-                            'No messages yet.\nSay hello!',
+                            LocaleKeys.chat_no_messages_yet.tr(),
                             textAlign: TextAlign.center,
                             style: theme.textTheme.bodyLarge,
                           ),
@@ -202,7 +205,9 @@ class ChatViewState extends State<ChatView> {
     if (added == true && context.mounted) {
       SnackbarHelper.show(
         context,
-        isGroup ? 'Participants added!' : 'Group created successfully!',
+        isGroup
+            ? LocaleKeys.chat_participants_added.tr()
+            : LocaleKeys.chat_group_created_successfully.tr(),
       );
     }
   }

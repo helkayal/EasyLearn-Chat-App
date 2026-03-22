@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../auth/presentation/screens/login_screen.dart';
 import '../cubit/onboarding_cubit.dart';
@@ -43,7 +46,7 @@ class _OnboardingViewState extends State<OnboardingView> {
                     (route) => false,
                   );
                 },
-                child: const Text("Skip"),
+                child: Text(LocaleKeys.onboarding_skip.tr()),
               ),
             ),
 

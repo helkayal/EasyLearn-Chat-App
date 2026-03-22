@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 
+import '../../../../generated/locale_keys.g.dart';
 import '../../model/chat_model.dart';
 import '../cubit/messages_state.dart';
 import 'message_bubble.dart';
@@ -25,7 +27,7 @@ class ChatMessagesList extends StatelessWidget {
     if (messages.isEmpty) {
       return Center(
         child: Text(
-          'No messages yet.\nSay hello!',
+          LocaleKeys.chat_no_messages_yet.tr(),
           textAlign: TextAlign.center,
           style: Theme.of(context).textTheme.bodyLarge,
         ),

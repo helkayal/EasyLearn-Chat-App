@@ -2,6 +2,9 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:easy_localization/easy_localization.dart';
+
+import '../../../../generated/locale_keys.g.dart';
 
 import '../../../../core/utils/snackbar_helper.dart';
 import '../../../../core/widgets/custom_avatar.dart';
@@ -46,11 +49,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final theme = Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(title: const Text("Edit Profile")),
+      appBar: AppBar(title: Text(LocaleKeys.profile_edit_profile.tr())),
       body: BlocListener<ProfileCubit, ProfileState>(
         listener: (context, state) {
           if (state is ProfileSuccess) {
-            SnackbarHelper.show(context, "Profile Updated!");
+            SnackbarHelper.show(
+              context,
+              LocaleKeys.profile_profile_updated.tr(),
+            );
             Navigator.pop(context);
           }
         },
@@ -91,11 +97,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               ),
               const SizedBox(height: 30),
               CustomTextField(
-                label: "Display Name",
+                label: LocaleKeys.profile_display_name.tr(),
                 controller: _nameController,
               ),
               const SizedBox(height: 20),
-              CustomTextField(label: "Status", controller: _statusController),
+              CustomTextField(
+                label: LocaleKeys.profile_status.tr(),
+                controller: _statusController,
+              ),
               const SizedBox(height: 40),
               BlocBuilder<ProfileCubit, ProfileState>(
                 builder: (context, state) {
@@ -103,7 +112,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     return const CustomLoadingIndicator();
                   }
                   return ActionButton(
-                    label: "Save Changes",
+                    label: LocaleKeys.profile_save_changes.tr(),
                     backgroundColor: theme.primaryColor,
                     textColor: theme.colorScheme.onPrimary,
                     onPressed: () {
