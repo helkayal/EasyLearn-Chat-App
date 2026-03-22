@@ -95,7 +95,8 @@
     "favorite_chat": "إضافة للمفضلة",
     "participants_added": "تمت إضافة المشاركين!",
     "group_created_successfully": "تم إنشاء المجموعة بنجاح!",
-    "add" : "إضافة"
+    "add" : "إضافة",
+    "group_participants": "أعضاء المجموعة"
   },
   "profile": {
     "title": "الملف الشخصي",

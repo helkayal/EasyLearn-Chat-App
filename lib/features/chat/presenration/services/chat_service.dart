@@ -26,4 +26,41 @@ class ChatService {
       // Allow it to fail silently
     }
   }
+
+  static Future<void> deleteOrLeaveChat({
+    required String chatId,
+    required bool isGroup,
+    required String currentUserId,
+  }) async {
+    final ref = FirebaseFirestore.instance.collection('chats').doc(chatId);
+
+    if (isGroup) {
+      // Leave group cleanly
+      final snap = await ref.get();
+      if (!snap.exists) return;
+
+      final data = snap.data();
+      if (data == null) return;
+
+      final currentIds = List<String>.from(data['participantIds'] ?? []);
+      currentIds.remove(currentUserId);
+
+      final unreadByUser = Map<String, dynamic>.from(
+        data['unreadByUser'] ?? {},
+      );
+      unreadByUser.remove(currentUserId);
+
+      final favorited = List<String>.from(data['favoritedByUserIds'] ?? []);
+      favorited.remove(currentUserId);
+
+      await ref.update({
+        'participantIds': currentIds,
+        'unreadByUser': unreadByUser,
+        'favoritedByUserIds': favorited,
+      });
+    } else {
+      // Delete individual chat entirely
+      await ref.delete();
+    }
+  }
 }

@@ -95,7 +95,8 @@
     "favorite_chat": "Chat favorito",
     "participants_added": "¡Participantes agregados!",
     "group_created_successfully": "¡Grupo creado con éxito!",
-    "add" : "Añadir"
+    "add" : "Añadir",
+    "group_participants": "Miembros del grupo"
   },
   "profile": {
     "title": "Perfil",

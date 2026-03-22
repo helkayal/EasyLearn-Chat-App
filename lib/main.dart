@@ -6,8 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'chat_app.dart';
 import 'core/services/local_storage_services.dart';
-import 'features/auth/presentation/screens/login_screen.dart';
-import 'features/onboarding/presentation/screen/onboarding_screen.dart';
+import 'core/widgets/auth_wrapper.dart';
 import 'features/settings/presenration/cubit/language_cubit.dart';
 import 'features/settings/presenration/cubit/theme_cubit.dart';
 
@@ -36,9 +35,7 @@ void main() async {
           BlocProvider(create: (context) => ThemeCubit()),
           BlocProvider(create: (context) => LanguageCubit()),
         ],
-        child: ChatApp(
-          startWidget: showLogin ? LoginScreen() : OnboardingScreen(),
-        ),
+        child: ChatApp(startWidget: AuthWrapper(showLogin: showLogin)),
       ),
     ),
   );

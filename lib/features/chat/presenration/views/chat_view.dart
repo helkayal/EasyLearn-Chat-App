@@ -16,6 +16,7 @@ import '../widgets/add_participants_sheet.dart';
 import '../widgets/chat_input.dart';
 import '../widgets/chat_messages_list.dart';
 import '../widgets/group_avatar_widget.dart';
+import '../widgets/group_members_sheet.dart';
 
 class ChatView extends StatefulWidget {
   final String chatId;
@@ -95,17 +96,28 @@ class ChatViewState extends State<ChatView> {
 
         return Scaffold(
           appBar: AppBar(
-            title: Row(
-              children: [
-                _buildAvatar(chat),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    _buildTitle(chat),
-                    overflow: TextOverflow.ellipsis,
+            title: GestureDetector(
+              onTap: () {
+                if (chat != null && chat.isGroup) {
+                  GroupMembersSheet.show(
+                    context,
+                    participantIds: chat.participantIds,
+                  );
+                }
+              },
+              behavior: HitTestBehavior.opaque,
+              child: Row(
+                children: [
+                  _buildAvatar(chat),
+                  const SizedBox(width: 10),
+                  Expanded(
+                    child: Text(
+                      _buildTitle(chat),
+                      overflow: TextOverflow.ellipsis,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
             leading: IconButton(
               icon: const Icon(Icons.arrow_back),

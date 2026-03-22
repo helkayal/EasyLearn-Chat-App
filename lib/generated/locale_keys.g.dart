@@ -95,6 +95,7 @@ abstract class  LocaleKeys {
   static const chat_participants_added = 'chat.participants_added';
   static const chat_group_created_successfully = 'chat.group_created_successfully';
   static const chat_add = 'chat.add';
+  static const chat_group_participants = 'chat.group_participants';
   static const chat = 'chat';
   static const profile_title = 'profile.title';
   static const profile_name = 'profile.name';

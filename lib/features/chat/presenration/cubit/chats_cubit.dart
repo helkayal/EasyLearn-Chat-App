@@ -77,6 +77,17 @@ class ChatsCubit extends Cubit<ChatsState> {
     );
   }
 
+  Future<void> deleteChat({
+    required ChatModel chat,
+    required String currentUserId,
+  }) async {
+    await ChatService.deleteOrLeaveChat(
+      chatId: chat.id,
+      isGroup: chat.isGroup,
+      currentUserId: currentUserId,
+    );
+  }
+
   Future<void> stopWatching() async {
     await _sub?.cancel();
     _sub = null;
