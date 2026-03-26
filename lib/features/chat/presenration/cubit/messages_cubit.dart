@@ -1,8 +1,10 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../../core/services/supabase_service.dart';
 import '../../model/message_model.dart';
 import 'messages_state.dart';
 
@@ -109,6 +111,72 @@ class MessagesCubit extends Cubit<MessagesState> {
       }
       await chatRef.update({
         'lastMessage': text.trim(),
+        'lastMessageSenderId': senderId,
+        'lastMessageAt': FieldValue.serverTimestamp(),
+        'unreadByUser': unreadByUser,
+      });
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<void> sendMediaMessage({
+    required String chatId,
+    required String senderId,
+    required String senderName,
+    required String senderPic,
+    required MessageType type,
+    required Uint8List bytes,
+    required String extension,
+  }) async {
+    try {
+      final url = await SupabaseService.uploadChatMessageMedia(
+        bytes: bytes,
+        chatId: chatId,
+        extension: extension,
+      );
+
+      final message = MessageModel(
+        id: '',
+        chatId: chatId,
+        senderId: senderId,
+        senderName: senderName,
+        senderPic: senderPic,
+        text: type == MessageType.image ? '📷 Image' : '🎥 Video',
+        type: type,
+        attachmentUrl: url,
+      );
+
+      await _firestore
+          .collection('chats')
+          .doc(chatId)
+          .collection('messages')
+          .add(message.toMap());
+
+      final chatRef = _firestore.collection('chats').doc(chatId);
+      final chatSnap = await chatRef.get();
+      final data = chatSnap.data();
+      final participantIds = List<String>.from(data?['participantIds'] ?? []);
+
+      final unreadRaw = data?['unreadByUser'] as Map<String, dynamic>?;
+      final unreadByUser = Map<String, int>.from(
+        unreadRaw?.map(
+              (k, v) =>
+                  MapEntry(k, v is num ? v.toInt() : int.tryParse('$v') ?? 0),
+            ) ??
+            {},
+      );
+
+      for (final uid in participantIds) {
+        if (uid != senderId) {
+          unreadByUser[uid] = (unreadByUser[uid] ?? 0) + 1;
+        } else {
+          unreadByUser[uid] = 0;
+        }
+      }
+
+      await chatRef.update({
+        'lastMessage': message.text,
         'lastMessageSenderId': senderId,
         'lastMessageAt': FieldValue.serverTimestamp(),
         'unreadByUser': unreadByUser,

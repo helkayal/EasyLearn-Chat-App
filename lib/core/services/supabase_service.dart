@@ -6,8 +6,6 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 import 'supabase_secrets.dart';
 
 class SupabaseService {
-  // Keys are loaded from a gitignored secrets file so the IDE runs
-  // without needing any special --dart-define parameters.
   static const String _supabaseUrl = SupabaseSecrets.supabaseUrl;
   static const String _supabaseAnonKey = SupabaseSecrets.supabaseAnonKey;
   static const String _serviceRoleKey = SupabaseSecrets.serviceRoleKey;
@@ -115,6 +113,52 @@ class SupabaseService {
     } catch (e, stack) {
       // ignore: avoid_print
       print('[SupabaseService] uploadGroupImage error: $e\n$stack');
+      rethrow;
+    }
+  }
+
+  /// Uploads media for a chat message to the `chat_media` bucket.
+  /// Generates a unique filename based on the timestamp.
+  static Future<String> uploadChatMessageMedia({
+    required Uint8List bytes,
+    required String chatId,
+    required String extension,
+  }) async {
+    try {
+      final timestamp = DateTime.now().millisecondsSinceEpoch;
+      final fileName = '${chatId}_$timestamp.$extension';
+      final path = '$chatId/$fileName';
+
+      // Use admin client to bypass RLS for uploads
+      final adminClient = SupabaseClient(_supabaseUrl, _serviceRoleKey);
+
+      // Determine content type
+      String contentType = 'application/octet-stream';
+      final ext = extension.toLowerCase();
+      if (['jpg', 'jpeg', 'png', 'gif', 'webp'].contains(ext)) {
+        contentType = 'image/${ext == 'jpg' ? 'jpeg' : ext}';
+      } else if (['mp4', 'mov', 'avi'].contains(ext)) {
+        contentType = 'video/$ext';
+      }
+
+      await adminClient.storage
+          .from('chat_media')
+          .uploadBinary(
+            path,
+            bytes,
+            fileOptions: FileOptions(upsert: true, contentType: contentType),
+          );
+
+      final publicUrl = adminClient.storage
+          .from('chat_media')
+          .getPublicUrl(path);
+
+      await adminClient.dispose();
+
+      return '$publicUrl?t=$timestamp';
+    } catch (e, stack) {
+      // ignore: avoid_print
+      print('[SupabaseService] uploadChatMessageMedia error: $e\n$stack');
       rethrow;
     }
   }

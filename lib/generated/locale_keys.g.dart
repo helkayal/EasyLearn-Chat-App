@@ -77,6 +77,9 @@ abstract class  LocaleKeys {
   static const chat_search_chat_hint = 'chat.search_chat_hint';
   static const chat_message_hint = 'chat.message_hint';
   static const chat_add_participants = 'chat.add_participants';
+  static const chat_photo_gallery = 'chat.photo_gallery';
+  static const chat_video_gallery = 'chat.video_gallery';
+  static const chat_camera = 'chat.camera';
   static const chat_create_group = 'chat.create_group';
   static const chat_group_name_label = 'chat.group_name_label';
   static const chat_group_hint_example = 'chat.group_hint_example';

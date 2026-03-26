@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_avatar.dart';
 import '../../model/message_model.dart';
+import 'video_message_player_widget.dart';
 
 class MessageBubble extends StatelessWidget {
   final MessageModel message;
@@ -24,7 +26,12 @@ class MessageBubble extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    if (message.type != MessageType.text || message.text == null) {
+    // Filter out unsupported message types
+    if (![
+      MessageType.text,
+      MessageType.image,
+      MessageType.video,
+    ].contains(message.type)) {
       return const SizedBox.shrink();
     }
 
@@ -64,12 +71,40 @@ class MessageBubble extends StatelessWidget {
             ),
             const SizedBox(height: 2),
           ],
-          Text(
-            message.text!,
-            style: theme.textTheme.bodyLarge?.copyWith(
-              color: isMe ? theme.colorScheme.onPrimary : null,
+          if (message.type == MessageType.image &&
+              message.attachmentUrl != null) ...[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: CachedNetworkImage(
+                imageUrl: message.attachmentUrl!,
+                placeholder: (context, url) => const SizedBox(
+                  height: 150,
+                  child: Center(child: CircularProgressIndicator()),
+                ),
+                errorWidget: (context, url, error) => const SizedBox(
+                  height: 150,
+                  child: Center(child: Icon(Icons.error)),
+                ),
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
+            const SizedBox(height: 4),
+          ],
+          if (message.type == MessageType.video &&
+              message.attachmentUrl != null) ...[
+            ClipRRect(
+              borderRadius: BorderRadius.circular(8),
+              child: VideoMessagePlayerWidget(url: message.attachmentUrl!),
+            ),
+            const SizedBox(height: 4),
+          ],
+          if (message.text != null && message.text!.isNotEmpty)
+            Text(
+              message.text!,
+              style: theme.textTheme.bodyLarge?.copyWith(
+                color: isMe ? theme.colorScheme.onPrimary : null,
+              ),
+            ),
           if (message.createdAt != null) ...[
             const SizedBox(height: 4),
             Text(
