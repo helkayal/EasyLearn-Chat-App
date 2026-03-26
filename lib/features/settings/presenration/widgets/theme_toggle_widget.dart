@@ -56,6 +56,12 @@ class ThemeToggleWidget extends StatelessWidget {
             children: [
               _toggleItem(
                 context,
+                LocaleKeys.settings_system.tr(),
+                currentMode == ThemeMode.system,
+                () => context.read<ThemeCubit>().updateTheme(ThemeMode.system),
+              ),
+              _toggleItem(
+                context,
                 LocaleKeys.settings_light.tr(),
                 currentMode == ThemeMode.light,
                 () => context.read<ThemeCubit>().updateTheme(ThemeMode.light),

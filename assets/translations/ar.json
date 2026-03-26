@@ -120,6 +120,7 @@
     "light": "فاتح",
     "dark": "داكن",
     "language": "اللغة",
-    "change_language": "تغيير اللغة"
+    "change_language": "تغيير اللغة",
+    "system": "النظام"
   }
 }

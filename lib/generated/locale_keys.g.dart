@@ -118,6 +118,7 @@ abstract class  LocaleKeys {
   static const settings_dark = 'settings.dark';
   static const settings_language = 'settings.language';
   static const settings_change_language = 'settings.change_language';
+  static const settings_system = 'settings.system';
   static const settings = 'settings';
 
 }

@@ -120,6 +120,7 @@
     "light": "Light",
     "dark": "Dark",
     "language": "Language",
-    "change_language": "Change Language"
+    "change_language": "Change Language",
+    "system": "System"
   }
 }

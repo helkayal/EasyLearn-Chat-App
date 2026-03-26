@@ -120,6 +120,7 @@
     "light": "Clair",
     "dark": "Sombre",
     "language": "Langue",
-    "change_language": "Changer la langue"
+    "change_language": "Changer la langue",
+    "system": "Système"
   }
 }

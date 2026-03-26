@@ -5,7 +5,7 @@ import '../../../../core/services/local_storage_services.dart';
 class ThemeCubit extends Cubit<ThemeMode> {
   final LocalStorageService _storageService = LocalStorageService();
 
-  ThemeCubit() : super(ThemeMode.light) {
+  ThemeCubit() : super(ThemeMode.system) {
     loadTheme();
   }
 
@@ -14,7 +14,7 @@ class ThemeCubit extends Cubit<ThemeMode> {
     if (savedTheme != null) {
       final mode = ThemeMode.values.firstWhere(
         (e) => e.toString() == savedTheme,
-        orElse: () => ThemeMode.light,
+        orElse: () => ThemeMode.system,
       );
       emit(mode);
     }
