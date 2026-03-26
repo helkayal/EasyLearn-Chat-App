@@ -3,23 +3,16 @@ import 'dart:typed_data';
 
 import 'package:supabase_flutter/supabase_flutter.dart';
 
+import 'supabase_secrets.dart';
+
 class SupabaseService {
-  // Keys are injected at build time via:
-  //   flutter run --dart-define-from-file=dart_defines/secrets.json
-  static const String _supabaseUrl = String.fromEnvironment('SUPABASE_URL');
-  static const String _supabaseAnonKey = String.fromEnvironment(
-    'SUPABASE_ANON_KEY',
-  );
-  static const String _serviceRoleKey = String.fromEnvironment(
-    'SUPABASE_SERVICE_KEY',
-  );
+  // Keys are loaded from a gitignored secrets file so the IDE runs
+  // without needing any special --dart-define parameters.
+  static const String _supabaseUrl = SupabaseSecrets.supabaseUrl;
+  static const String _supabaseAnonKey = SupabaseSecrets.supabaseAnonKey;
+  static const String _serviceRoleKey = SupabaseSecrets.serviceRoleKey;
 
   static Future<void> initialize() async {
-    assert(
-      _supabaseUrl.isNotEmpty,
-      'SUPABASE_URL is not defined. '
-      'Run with --dart-define-from-file=dart_defines/secrets.json',
-    );
     await Supabase.initialize(url: _supabaseUrl, anonKey: _supabaseAnonKey);
   }
 
