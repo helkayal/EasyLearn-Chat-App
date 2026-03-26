@@ -1,6 +1,8 @@
+import 'dart:typed_data';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/utils/snackbar_helper.dart';
 import '../cubit/group_management_cubit.dart';
@@ -25,7 +27,7 @@ class AddParticipantsSheet extends StatefulWidget {
     required List<String> currentParticipantIds,
     required bool isGroup,
   }) async {
-    final result = await showModalBottomSheet<dynamic>(
+    return showModalBottomSheet<dynamic>(
       context: context,
       isScrollControlled: true,
       useSafeArea: true,
@@ -38,7 +40,6 @@ class AddParticipantsSheet extends StatefulWidget {
         isGroup: isGroup,
       ),
     );
-    return result;
   }
 
   @override
@@ -50,11 +51,31 @@ class _AddParticipantsSheetState extends State<AddParticipantsSheet> {
   final _searchController = TextEditingController();
   String _searchQuery = '';
 
+  /// Bytes of the picked image — read immediately so no temp path issues.
+  Uint8List? _groupImageBytes;
+
+  /// Preview file for displaying the picked image locally.
+  XFile? _groupImageFile;
+
   @override
   void dispose() {
     _groupNameController.dispose();
     _searchController.dispose();
     super.dispose();
+  }
+
+  Future<void> _pickGroupImage() async {
+    final picked = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      imageQuality: 85,
+    );
+    if (picked != null && mounted) {
+      final bytes = await picked.readAsBytes();
+      setState(() {
+        _groupImageFile = picked;
+        _groupImageBytes = bytes;
+      });
+    }
   }
 
   @override
@@ -72,23 +93,22 @@ class _AddParticipantsSheetState extends State<AddParticipantsSheet> {
           }
         },
         builder: (context, state) {
-          return _buildContent(context, state);
+          return ParticipantSheetContent(
+            state: state,
+            isGroup: widget.isGroup,
+            isAdding: state is GroupManagementAdding,
+            groupNameController: _groupNameController,
+            searchController: _searchController,
+            searchQuery: _searchQuery,
+            onSearchChanged: (v) =>
+                setState(() => _searchQuery = v.toLowerCase()),
+            onClose: () => Navigator.of(context).pop(false),
+            onConfirm: (selectedIds) => _confirm(context, selectedIds),
+            groupImageFile: _groupImageFile,
+            onPickGroupImage: _pickGroupImage,
+          );
         },
       ),
-    );
-  }
-
-  Widget _buildContent(BuildContext context, GroupManagementState state) {
-    return ParticipantSheetContent(
-      state: state,
-      isGroup: widget.isGroup,
-      isAdding: state is GroupManagementAdding,
-      groupNameController: _groupNameController,
-      searchController: _searchController,
-      searchQuery: _searchQuery,
-      onSearchChanged: (v) => setState(() => _searchQuery = v.toLowerCase()),
-      onClose: () => Navigator.of(context).pop(false),
-      onConfirm: (selectedIds) => _confirm(context, selectedIds),
     );
   }
 
@@ -99,6 +119,7 @@ class _AddParticipantsSheetState extends State<AddParticipantsSheet> {
         currentUserId: currentUserId,
         groupName: _groupNameController.text.trim(),
         newUserIds: selectedIds.toList(),
+        groupImageBytes: _groupImageBytes,
       );
     } else {
       context.read<GroupManagementCubit>().addParticipants(
@@ -106,6 +127,7 @@ class _AddParticipantsSheetState extends State<AddParticipantsSheet> {
         newUserIds: selectedIds.toList(),
         isCurrentlyIndividual: !widget.isGroup,
         groupName: widget.isGroup ? null : _groupNameController.text.trim(),
+        groupImageBytes: !widget.isGroup ? _groupImageBytes : null,
       );
     }
   }

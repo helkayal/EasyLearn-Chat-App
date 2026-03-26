@@ -1,7 +1,10 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../auth/model/user_model.dart';
+import '../../../../core/services/supabase_service.dart';
 import 'profile_state.dart';
 
 class ProfileCubit extends Cubit<ProfileState> {
@@ -33,6 +36,35 @@ class ProfileCubit extends Cubit<ProfileState> {
       emit(ProfileSuccess(user));
     } catch (e) {
       emit(ProfileError("Failed to update profile: ${e.toString()}"));
+    }
+  }
+
+  /// Uploads [imageFile] to Supabase, then saves the updated profile to Firestore.
+  Future<void> uploadImageAndUpdate({
+    required File imageFile,
+    required UserModel user,
+  }) async {
+    emit(ProfileLoading());
+    try {
+      final imageUrl = await SupabaseService.uploadProfileImage(
+        imageFile: imageFile,
+        userId: user.uid,
+      );
+      final updatedUser = UserModel(
+        uid: user.uid,
+        name: user.name,
+        email: user.email,
+        status: user.status,
+        profilePic: imageUrl,
+      );
+      await FirebaseFirestore.instance
+          .collection('users')
+          .doc(user.uid)
+          .update(updatedUser.toMap());
+      emit(ProfileLoaded(updatedUser));
+      emit(ProfileSuccess(updatedUser));
+    } catch (e) {
+      emit(ProfileError("Failed to upload image: ${e.toString()}"));
     }
   }
 

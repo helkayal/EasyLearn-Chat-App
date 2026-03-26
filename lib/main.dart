@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'chat_app.dart';
 import 'core/services/local_storage_services.dart';
+import 'core/services/supabase_service.dart';
 import 'core/widgets/auth_wrapper.dart';
 import 'features/settings/presenration/cubit/language_cubit.dart';
 import 'features/settings/presenration/cubit/theme_cubit.dart';
@@ -13,6 +14,7 @@ import 'features/settings/presenration/cubit/theme_cubit.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await SupabaseService.initialize();
 
   await EasyLocalization.ensureInitialized();
 

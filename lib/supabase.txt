@@ -1,0 +1,4 @@
+https://ftjvyufiwiwrwxbevijs.supabase.co
+sb_publishable_MC-E-BPZpRcTC4s889Wd9g_eqH8rPQB
+postgresql://postgres:app_chat_2026@db.ftjvyufiwiwrwxbevijs.supabase.co:5432/postgres
+app_chat_2026

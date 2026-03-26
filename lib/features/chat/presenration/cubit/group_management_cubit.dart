@@ -1,9 +1,11 @@
 import 'dart:async';
+import 'dart:typed_data';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../auth/model/user_model.dart';
+import '../../../../core/services/supabase_service.dart';
 import 'group_management_state.dart';
 
 class GroupManagementCubit extends Cubit<GroupManagementState> {
@@ -39,12 +41,35 @@ class GroupManagementCubit extends Cubit<GroupManagementState> {
   }
 
   /// Creates a completely new group chat from scratch.
+  /// If an image is provided it is uploaded to Supabase **before** the
+  /// Firestore document is created, so the URL is stored atomically.
+  /// If Firestore creation fails the uploaded image is deleted (rollback).
   Future<String> createGroup({
     required String currentUserId,
     required String groupName,
     required List<String> newUserIds,
+    Uint8List? groupImageBytes,
   }) async {
     emit(GroupManagementAdding());
+
+    // Step 1 — upload image bytes first to get the public URL
+    String? groupImageUrl;
+    final tempKey =
+        'temp_${currentUserId}_${DateTime.now().millisecondsSinceEpoch}';
+
+    if (groupImageBytes != null) {
+      try {
+        groupImageUrl = await SupabaseService.uploadGroupImageBytes(
+          bytes: groupImageBytes,
+          chatId: tempKey,
+        );
+      } catch (e) {
+        emit(GroupManagementError('Image upload failed: $e'));
+        return '';
+      }
+    }
+
+    // Step 2 — create the Firestore document with URL already set
     try {
       final updatedIds = [currentUserId, ...newUserIds];
       final unreadMap = {for (final id in updatedIds) id: 0};
@@ -59,10 +84,18 @@ class GroupManagementCubit extends Cubit<GroupManagementState> {
         'lastMessageSenderId': currentUserId,
         'unreadByUser': unreadMap,
         'favoritedByUserIds': <String>[],
+        'groupImage': groupImageUrl,
       });
+
       emit(GroupManagementSuccess(newChatId: doc.id));
       return doc.id;
     } catch (e) {
+      // Step 3 — rollback: delete the uploaded image if Firestore failed
+      if (groupImageUrl != null) {
+        // ignore: avoid_print
+        print('[GroupManagementCubit] Firestore failed — rolling back image…');
+        await SupabaseService.deleteGroupImage(chatId: tempKey);
+      }
       emit(GroupManagementError(e.toString()));
       rethrow;
     }
@@ -75,6 +108,7 @@ class GroupManagementCubit extends Cubit<GroupManagementState> {
     required List<String> newUserIds,
     required bool isCurrentlyIndividual,
     String? groupName,
+    Uint8List? groupImageBytes,
   }) async {
     emit(GroupManagementAdding());
     try {
@@ -91,6 +125,19 @@ class GroupManagementCubit extends Cubit<GroupManagementState> {
         update['groupName'] = groupName?.trim().isNotEmpty == true
             ? groupName!.trim()
             : 'Group';
+
+        // Upload group image if provided when converting to group
+        if (groupImageBytes != null) {
+          try {
+            final imageUrl = await SupabaseService.uploadGroupImageBytes(
+              bytes: groupImageBytes,
+              chatId: chatId,
+            );
+            update['groupImage'] = imageUrl;
+          } catch (e) {
+            rethrow;
+          }
+        }
       }
 
       await chatRef.update(update);

@@ -58,6 +58,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
               LocaleKeys.profile_profile_updated.tr(),
             );
             Navigator.pop(context);
+          } else if (state is ProfileError) {
+            SnackbarHelper.show(context, state.message, isError: true);
           }
         },
         child: SingleChildScrollView(
@@ -116,6 +118,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     backgroundColor: theme.primaryColor,
                     textColor: theme.colorScheme.onPrimary,
                     onPressed: () {
+                      final cubit = context.read<ProfileCubit>();
                       final updatedUser = UserModel(
                         uid: widget.user.uid,
                         name: _nameController.text.trim(),
@@ -123,7 +126,14 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         status: _statusController.text.trim(),
                         profilePic: widget.user.profilePic,
                       );
-                      context.read<ProfileCubit>().updateProfile(updatedUser);
+                      if (_imageFile != null) {
+                        cubit.uploadImageAndUpdate(
+                          imageFile: _imageFile!,
+                          user: updatedUser,
+                        );
+                      } else {
+                        cubit.updateProfile(updatedUser);
+                      }
                     },
                   );
                 },

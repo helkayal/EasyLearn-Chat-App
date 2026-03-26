@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/custom_avatar.dart';
 
 class GroupAvatarWidget extends StatelessWidget {
   final List<String> participantIds;
   final double radius;
+  final String? groupImage;
 
   const GroupAvatarWidget({
     super.key,
     required this.participantIds,
     this.radius = 28,
+    this.groupImage,
   });
 
   String _initial(String id) => id.isNotEmpty ? id[0].toUpperCase() : '?';
@@ -18,6 +21,16 @@ class GroupAvatarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
+    // ── If the group has an image, show it ──────────────────────────────
+    if (groupImage != null && groupImage!.isNotEmpty) {
+      return CustomAvatar(
+        imageUrl: groupImage!,
+        name: participantIds.isNotEmpty ? participantIds.first : 'G',
+        radius: radius,
+      );
+    }
+
+    // ── Fallback: initials / stacked avatars ────────────────────────────
     final ids = participantIds.take(3).toList();
     if (ids.isEmpty) {
       return CircleAvatar(

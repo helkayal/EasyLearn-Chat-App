@@ -1,3 +1,7 @@
+import 'dart:io';
+
+import 'package:image_picker/image_picker.dart';
+
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 
@@ -16,6 +20,8 @@ class ParticipantSheetContent extends StatelessWidget {
   final ValueChanged<String> onSearchChanged;
   final VoidCallback onClose;
   final Function(Set<String>) onConfirm;
+  final XFile? groupImageFile;
+  final VoidCallback? onPickGroupImage;
 
   const ParticipantSheetContent({
     super.key,
@@ -28,6 +34,8 @@ class ParticipantSheetContent extends StatelessWidget {
     required this.onSearchChanged,
     required this.onClose,
     required this.onConfirm,
+    this.groupImageFile,
+    this.onPickGroupImage,
   });
 
   @override
@@ -42,6 +50,7 @@ class ParticipantSheetContent extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          // ── Header row ─────────────────────────────────────────────────
           Padding(
             padding: const EdgeInsets.fromLTRB(20, 20, 12, 0),
             child: Row(
@@ -62,7 +71,49 @@ class ParticipantSheetContent extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
+          // ── New group fields ────────────────────────────────────────────
           if (!isGroup) ...[
+            // Circular group image picker
+            Center(
+              child: GestureDetector(
+                onTap: isAdding ? null : onPickGroupImage,
+                child: Stack(
+                  children: [
+                    CircleAvatar(
+                      radius: 42,
+                      backgroundColor:
+                          theme.colorScheme.surfaceContainerHighest,
+                      backgroundImage: groupImageFile != null
+                          ? FileImage(File(groupImageFile!.path))
+                          : null,
+                      child: groupImageFile == null
+                          ? Icon(
+                              Icons.group,
+                              size: 40,
+                              color: theme.colorScheme.onSurfaceVariant,
+                            )
+                          : null,
+                    ),
+                    Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: CircleAvatar(
+                        radius: 14,
+                        backgroundColor: theme.colorScheme.primary,
+                        child: Icon(
+                          Icons.camera_alt,
+                          size: 14,
+                          color: theme.colorScheme.onPrimary,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+
+            // Group name field
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
@@ -75,12 +126,12 @@ class ParticipantSheetContent extends StatelessWidget {
                     borderRadius: BorderRadius.circular(12),
                   ),
                 ),
-                onChanged: (_) {},
               ),
             ),
             const SizedBox(height: 12),
           ],
 
+          // ── Search field ────────────────────────────────────────────────
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: TextField(
@@ -98,11 +149,13 @@ class ParticipantSheetContent extends StatelessWidget {
           ),
           const SizedBox(height: 8),
 
+          // ── User list ───────────────────────────────────────────────────
           SizedBox(
-            height: 320,
+            height: 280,
             child: ParticipantUserList(state: state, searchQuery: searchQuery),
           ),
 
+          // ── Action bar ──────────────────────────────────────────────────
           ParticipantActionBar(
             state: state,
             isGroup: isGroup,

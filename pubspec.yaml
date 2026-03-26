@@ -14,8 +14,11 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_bloc: ^9.1.1
+  flutter_launcher_icons: ^0.14.4
+  flutter_native_splash: ^2.4.7
   image_picker: ^1.2.1
   shared_preferences: ^2.5.4
+  supabase_flutter: ^2.9.0
 
 dev_dependencies:
   flutter_test:
@@ -28,3 +31,19 @@ flutter:
   assets:
     - assets/images/
     - assets/translations/
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/splash.png
+  color_dark: "#281e55"
+  image_dark: assets/images/splash_dark.png
+
+  android_12:
+    image: assets/images/splash.png
+    icon_background_color: "#ffffff"
+    image_dark: assets/images/splash_dark.png
+    icon_background_color_dark: "#281e55"
+
+  android: true
+  ios: true
+  web: false
