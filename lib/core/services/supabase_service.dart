@@ -139,6 +139,8 @@ class SupabaseService {
         contentType = 'image/${ext == 'jpg' ? 'jpeg' : ext}';
       } else if (['mp4', 'mov', 'avi'].contains(ext)) {
         contentType = 'video/$ext';
+      } else if (['m4a', 'mp3', 'wav', 'aac', 'ogg'].contains(ext)) {
+        contentType = 'audio/$ext';
       }
 
       await adminClient.storage

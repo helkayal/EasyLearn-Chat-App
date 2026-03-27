@@ -5,6 +5,7 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/custom_avatar.dart';
 import '../../model/message_model.dart';
 import 'video_message_player_widget.dart';
+import 'audio_message_player_widget.dart';
 
 class MessageBubble extends StatelessWidget {
   final MessageModel message;
@@ -31,6 +32,7 @@ class MessageBubble extends StatelessWidget {
       MessageType.text,
       MessageType.image,
       MessageType.video,
+      MessageType.audio,
     ].contains(message.type)) {
       return const SizedBox.shrink();
     }
@@ -95,6 +97,14 @@ class MessageBubble extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(8),
               child: VideoMessagePlayerWidget(url: message.attachmentUrl!),
+            ),
+            const SizedBox(height: 4),
+          ],
+          if (message.type == MessageType.audio &&
+              message.attachmentUrl != null) ...[
+            AudioMessagePlayerWidget(
+              audioUrl: message.attachmentUrl!,
+              isMe: isMe,
             ),
             const SizedBox(height: 4),
           ],

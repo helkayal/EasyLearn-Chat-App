@@ -142,7 +142,9 @@ class MessagesCubit extends Cubit<MessagesState> {
         senderId: senderId,
         senderName: senderName,
         senderPic: senderPic,
-        text: type == MessageType.image ? '📷 Image' : '🎥 Video',
+        text: type == MessageType.image
+            ? '📷 Image'
+            : (type == MessageType.video ? '🎥 Video' : '🎵 Audio'),
         type: type,
         attachmentUrl: url,
       );
