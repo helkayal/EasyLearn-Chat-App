@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:easy_localization/easy_localization.dart';
 
 import '../../../../generated/locale_keys.g.dart';
-import '../../../../core/widgets/custom_loading_indicator.dart';
 import '../../../../core/widgets/custom_text_field.dart';
 import '../../../onboarding/presentation/widgets/action_button.dart';
 import '../cubit/login_cubit.dart';
@@ -69,21 +68,20 @@ class _LoginFormState extends State<LoginForm> {
 
           BlocBuilder<LoginCubit, LoginState>(
             builder: (context, state) {
-              if (state is LoginLoading) {
-                return CustomLoadingIndicator(color: theme.primaryColor);
-              }
               return ActionButton(
                 label: LocaleKeys.login_login_button.tr(),
                 backgroundColor: theme.primaryColor,
                 textColor: theme.colorScheme.onPrimary,
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    context.read<LoginCubit>().login(
-                      _emailController.text.trim(),
-                      _passwordController.text.trim(),
-                    );
-                  }
-                },
+                onPressed: state is LoginLoading
+                    ? null
+                    : () {
+                        if (_formKey.currentState!.validate()) {
+                          context.read<LoginCubit>().login(
+                            _emailController.text.trim(),
+                            _passwordController.text.trim(),
+                          );
+                        }
+                      },
               );
             },
           ),

@@ -141,6 +141,16 @@ class SupabaseService {
         contentType = 'video/$ext';
       } else if (['m4a', 'mp3', 'wav', 'aac', 'ogg'].contains(ext)) {
         contentType = 'audio/$ext';
+      } else if (ext == 'pdf') {
+        contentType = 'application/pdf';
+      } else if (['doc', 'docx'].contains(ext)) {
+        contentType = 'application/msword';
+      } else if (['xls', 'xlsx'].contains(ext)) {
+        contentType = 'application/vnd.ms-excel';
+      } else if (['ppt', 'pptx'].contains(ext)) {
+        contentType = 'application/vnd.ms-powerpoint';
+      } else if (ext == 'txt') {
+        contentType = 'text/plain';
       }
 
       await adminClient.storage

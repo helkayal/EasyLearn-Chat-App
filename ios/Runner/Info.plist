@@ -44,5 +44,16 @@
 		<string>This app needs access to your microphone if you record videos.</string>
 		<key>UIStatusBarHidden</key>
 		<false/>
+		<key>CFBundleURLTypes</key>
+		<array>
+			<dict>
+				<key>CFBundleTypeRole</key>
+				<string>Editor</string>
+				<key>CFBundleURLSchemes</key>
+				<array>
+					<string>com.googleusercontent.apps.493516272043-14g8488klhv421fnjnn1nkvqntml9gnl</string>
+				</array>
+			</dict>
+		</array>
 	</dict>
 </plist>

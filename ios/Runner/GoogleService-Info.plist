@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CLIENT_ID</key>
+	<string>493516272043-14g8488klhv421fnjnn1nkvqntml9gnl.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.493516272043-14g8488klhv421fnjnn1nkvqntml9gnl</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDeYkV7SwCPZsIMZkm-cJ2JNt1acczlqwg</string>
 	<key>GCM_SENDER_ID</key>
@@ -26,5 +30,7 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:493516272043:ios:60fb85d489fa7b29c4a2ee</string>
+	<key>DATABASE_URL</key>
+	<string>https://easylearn-chat-default-rtdb.firebaseio.com</string>
 </dict>
 </plist>

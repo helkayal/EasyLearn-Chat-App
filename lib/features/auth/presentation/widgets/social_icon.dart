@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../cubit/login_cubit.dart';
+import '../cubit/login_states.dart';
 
 class SocialIcon extends StatelessWidget {
   final String path;
@@ -7,16 +11,29 @@ class SocialIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: social == "google"
-          ? () {}
-          : social == "apple"
-          ? () {}
-          : () {},
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(50),
-        child: Image.asset(path, height: 60),
-      ),
+    return BlocBuilder<LoginCubit, LoginState>(
+      builder: (context, state) {
+        final isLoading = state is LoginLoading;
+
+        return InkWell(
+          onTap: isLoading
+              ? null
+              : social == "google"
+              ? () {
+                  context.read<LoginCubit>().signInWithGoogle();
+                }
+              : social == "apple"
+              ? () {}
+              : () {},
+          child: Opacity(
+            opacity: isLoading ? 0.5 : 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(50),
+              child: Image.asset(path, height: 60),
+            ),
+          ),
+        );
+      },
     );
   }
 }
